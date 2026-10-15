@@ -139,9 +139,14 @@ export function Footer() {
         </Stagger>
 
         <div className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-6 text-sm text-white/60 sm:flex-row sm:items-center">
-          <p>
-            &copy; {new Date().getFullYear()} Aquazone Ornamental Fish Farm (Pvt) Ltd. All rights reserved.
-          </p>
+          <div className="space-y-1">
+            <p>
+              &copy; {new Date().getFullYear()} Aquazone Ornamental Fish Farm (Pvt) Ltd. All rights reserved.
+            </p>
+            <p>
+              Website designed &amp; built by <span className="font-semibold text-aqua-300">{site.builder}</span>
+            </p>
+          </div>
           <BackToTop />
         </div>
       </div>

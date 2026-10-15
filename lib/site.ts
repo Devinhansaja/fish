@@ -10,6 +10,8 @@ export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:30
 export const site = {
   name: "Aquazone Ornamental Fish Farm (Pvt) Ltd",
   shortName: "Aquazone",
+  /** Web design & development credit shown in the footer */
+  builder: "Gloma International",
   tagline: "Sri Lanka's Living Reef, Delivered Worldwide.",
   description:
     "Aquazone Ornamental Fish Farm (Pvt) Ltd is a Sri Lankan exporter of high-quality live ornamental freshwater fish for wholesalers, distributors, retailers and public aquariums worldwide.",
