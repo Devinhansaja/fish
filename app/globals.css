@@ -1,0 +1,668 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ */
+/* Aquazone design tokens                                              */
+/* ------------------------------------------------------------------ */
+:root {
+  --navy: #0b2545;
+  --navy-900: #071a33;
+  --navy-700: #0a4a6b;
+  --aqua: #00b4c6;
+  --aqua-300: #6fd8e3;
+  --aqua-700: #00717f; /* AA-safe aqua for text on light backgrounds */
+  --coral: #ff7b63;
+  --coral-600: #e8604a;
+  --sun: #ffd166;
+  --mint: #eefffc;
+  --ink: #0b2545;
+  --muted: #3e5670;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-io: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --grad-deep: linear-gradient(180deg, #0b2545 0%, #0a4a6b 45%, #00b4c6 100%);
+  --grad-glow: radial-gradient(circle at 50% 0%, rgba(0, 180, 198, 0.35), transparent 60%);
+  --shadow-card: 0 1px 2px rgba(11, 37, 69, 0.06), 0 12px 32px -8px rgba(11, 37, 69, 0.18);
+  --shadow-lift: 0 2px 4px rgba(11, 37, 69, 0.08), 0 28px 56px -12px rgba(0, 180, 198, 0.35);
+}
+
+@theme inline {
+  --color-navy: var(--navy);
+  --color-navy-900: var(--navy-900);
+  --color-navy-700: var(--navy-700);
+  --color-aqua: var(--aqua);
+  --color-aqua-300: var(--aqua-300);
+  --color-aqua-700: var(--aqua-700);
+  --color-coral: var(--coral);
+  --color-coral-600: var(--coral-600);
+  --color-sun: var(--sun);
+  --color-mint: var(--mint);
+  --color-muted: var(--muted);
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-heading: var(--font-poppins), var(--font-inter), system-ui, sans-serif;
+}
+
+/* ------------------------------------------------------------------ */
+/* Base                                                                */
+/* ------------------------------------------------------------------ */
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: #ffffff;
+  color: var(--ink);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-poppins), var(--font-inter), system-ui, sans-serif;
+  color: var(--navy);
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+  font-weight: 700;
+}
+
+.on-dark h1,
+.on-dark h2,
+.on-dark h3,
+.on-dark h4 {
+  color: #ffffff;
+}
+
+.h1 {
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 800;
+}
+.h2 {
+  font-size: clamp(2rem, 4vw, 3.25rem);
+}
+.h3 {
+  font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+  font-weight: 600;
+}
+
+:focus-visible {
+  outline: 3px solid var(--aqua);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+.on-dark :focus-visible {
+  outline-color: var(--sun);
+}
+
+::selection {
+  background: var(--aqua);
+  color: var(--navy-900);
+}
+
+.container-x {
+  position: relative;
+  z-index: 2; /* content sits above the ambient swimming fish (z-index 1) */
+  width: 100%;
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4vw, 2.5rem);
+}
+
+.section {
+  position: relative;
+  padding-block: clamp(4rem, 9vw, 8rem);
+}
+
+.skip-link {
+  position: fixed;
+  left: 1rem;
+  top: -4rem;
+  z-index: 200;
+  background: var(--sun);
+  color: var(--navy);
+  padding: 0.6rem 1rem;
+  border-radius: 999px;
+  font-weight: 600;
+  transition: top 0.2s;
+}
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* ------------------------------------------------------------------ */
+/* Components                                                          */
+/* ------------------------------------------------------------------ */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--aqua-700);
+}
+.eyebrow::before {
+  content: "";
+  width: 2rem;
+  height: 2px;
+  background: currentColor;
+  border-radius: 2px;
+}
+.on-dark .eyebrow {
+  color: var(--aqua-300);
+}
+
+/* Coral is reserved for primary conversion actions */
+.btn-cta {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  background: var(--coral);
+  color: var(--navy-900);
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 0.95rem 1.7rem;
+  border-radius: 999px;
+  box-shadow: 0 10px 28px -10px rgba(255, 123, 99, 0.7);
+  transition:
+    background-color 0.25s var(--ease-out),
+    transform 0.25s var(--ease-out),
+    box-shadow 0.25s var(--ease-out);
+  overflow: hidden;
+  isolation: isolate;
+  cursor: pointer;
+  border: 0;
+  text-decoration: none;
+}
+.btn-cta:hover {
+  background: var(--coral-600);
+  box-shadow: 0 16px 34px -10px rgba(232, 96, 74, 0.8);
+}
+.btn-cta:active {
+  transform: scale(0.97);
+}
+.btn-cta[disabled] {
+  opacity: 0.7;
+  cursor: progress;
+}
+.btn-cta--sm {
+  padding: 0.6rem 1.15rem;
+  font-size: 0.9375rem;
+}
+.btn-cta--pulse::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: 0 0 0 0 rgba(255, 123, 99, 0.65);
+  animation: pulse-ring 6s var(--ease-out) infinite;
+  z-index: -1;
+}
+.btn-ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.55);
+  transform: scale(0);
+  animation: ripple 0.7s var(--ease-out) forwards;
+  pointer-events: none;
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.9rem 1.6rem;
+  border-radius: 999px;
+  border: 2px solid currentColor;
+  color: var(--navy);
+  background: transparent;
+  transition:
+    background-color 0.25s var(--ease-out),
+    color 0.25s var(--ease-out),
+    transform 0.25s var(--ease-out);
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn-ghost:hover {
+  background: var(--navy);
+  color: #ffffff;
+}
+.on-dark .btn-ghost {
+  color: #ffffff;
+}
+.on-dark .btn-ghost:hover {
+  background: #ffffff;
+  color: var(--navy);
+}
+.btn-ghost:active {
+  transform: scale(0.97);
+}
+
+.link-aqua {
+  color: var(--aqua-700);
+  font-weight: 600;
+  text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 2px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.35s var(--ease-out);
+}
+.link-aqua:hover {
+  background-size: 100% 2px;
+}
+.on-dark .link-aqua {
+  color: var(--aqua-300);
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 1.5rem;
+  box-shadow: var(--shadow-card);
+  border: 1px solid rgba(11, 37, 69, 0.06);
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.09);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 1.5rem;
+}
+
+.bg-deep {
+  background: var(--grad-deep);
+}
+
+.nav-link {
+  position: relative;
+  padding: 0.5rem 0.15rem;
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: #ffffff;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--aqua-300);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s var(--ease-out);
+}
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+.draft-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  background: var(--sun);
+  color: var(--navy);
+}
+
+/* ------------------------------------------------------------------ */
+/* Form controls                                                       */
+/* ------------------------------------------------------------------ */
+.field {
+  position: relative;
+}
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  background: var(--mint);
+  border: 1.5px solid rgba(11, 37, 69, 0.18);
+  border-radius: 0.9rem;
+  padding: 1.5rem 1rem 0.6rem;
+  font: inherit;
+  color: var(--navy);
+  transition:
+    border-color 0.25s var(--ease-out),
+    box-shadow 0.25s var(--ease-out),
+    background-color 0.25s;
+}
+.field textarea {
+  min-height: 8rem;
+  resize: vertical;
+}
+.field label {
+  position: absolute;
+  left: 1rem;
+  top: 1.05rem;
+  font-size: 1rem;
+  color: var(--muted);
+  pointer-events: none;
+  transform-origin: left top;
+  transition:
+    transform 0.25s var(--ease-out),
+    color 0.25s;
+}
+.field input:focus ~ label,
+.field input:not(:placeholder-shown) ~ label,
+.field textarea:focus ~ label,
+.field textarea:not(:placeholder-shown) ~ label,
+.field select ~ label {
+  transform: translateY(-0.75rem) scale(0.78);
+  color: var(--aqua-700);
+}
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--aqua);
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(0, 180, 198, 0.22);
+}
+.field[data-invalid="true"] input,
+.field[data-invalid="true"] select,
+.field[data-invalid="true"] textarea {
+  border-color: #c2362b;
+  animation: shake 0.4s var(--ease-io);
+}
+.field-error {
+  color: #a82a20;
+  font-size: 0.85rem;
+  margin-top: 0.3rem;
+  font-weight: 500;
+}
+
+/* ------------------------------------------------------------------ */
+/* Keyframes                                                           */
+/* ------------------------------------------------------------------ */
+@keyframes bubble-rise {
+  0% {
+    transform: translate3d(0, 0, 0) scale(0.7);
+    opacity: 0;
+  }
+  10% {
+    opacity: var(--b-op, 0.6);
+  }
+  90% {
+    opacity: var(--b-op, 0.6);
+  }
+  100% {
+    transform: translate3d(0, -115vh, 0) scale(1.05);
+    opacity: 0;
+  }
+}
+@keyframes bubble-sway {
+  0%,
+  100% {
+    transform: translateX(calc(var(--sway, 14px) * -1));
+  }
+  50% {
+    transform: translateX(var(--sway, 14px));
+  }
+}
+@keyframes wave-slide {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+@keyframes ray-sway {
+  0%,
+  100% {
+    transform: rotate(var(--r0, -8deg)) translateX(-2%);
+    opacity: var(--o0, 0.18);
+  }
+  50% {
+    transform: rotate(calc(var(--r0, -8deg) + 7deg)) translateX(3%);
+    opacity: calc(var(--o0, 0.18) + 0.1);
+  }
+}
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(-5px);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+@keyframes swim-across {
+  from {
+    transform: translate3d(-20vw, 0, 0);
+  }
+  to {
+    transform: translate3d(120vw, 0, 0);
+  }
+}
+@keyframes swim-across-rtl {
+  from {
+    transform: translate3d(120vw, 0, 0);
+  }
+  to {
+    transform: translate3d(-20vw, 0, 0);
+  }
+}
+@keyframes swim-bob {
+  0%,
+  100% {
+    transform: translateY(calc(var(--amp, 18px) * -1)) rotate(-2deg);
+  }
+  50% {
+    transform: translateY(var(--amp, 18px)) rotate(2.5deg);
+  }
+}
+@keyframes tail-wag {
+  0%,
+  100% {
+    transform: rotate(-9deg);
+  }
+  50% {
+    transform: rotate(11deg);
+  }
+}
+@keyframes ken-burns {
+  from {
+    transform: scale(1.04) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.16) translate3d(-1.5%, -1%, 0);
+  }
+}
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 123, 99, 0.65);
+  }
+  22%,
+  100% {
+    box-shadow: 0 0 0 22px rgba(255, 123, 99, 0);
+  }
+}
+@keyframes pulse-dot {
+  0% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(3.2);
+    opacity: 0;
+  }
+}
+@keyframes ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+@keyframes shine {
+  0% {
+    transform: translateX(-120%) skewX(-18deg);
+  }
+  18%,
+  100% {
+    transform: translateX(260%) skewX(-18deg);
+  }
+}
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+}
+@keyframes scroll-cue {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(14px);
+    opacity: 0;
+  }
+}
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(4%, -3%, 0) scale(1.08);
+  }
+}
+@keyframes dash-flow {
+  to {
+    stroke-dashoffset: -28;
+  }
+}
+@keyframes inflate {
+  0%,
+  100% {
+    transform: scale(0.96);
+  }
+  50% {
+    transform: scale(1.04);
+  }
+}
+@keyframes drop-fall {
+  0% {
+    transform: translateY(-6px);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+}
+@keyframes gauge-wobble {
+  0%,
+  100% {
+    transform: rotate(-4deg);
+  }
+  50% {
+    transform: rotate(4deg);
+  }
+}
+
+.wave-layer {
+  display: flex;
+  width: 200%;
+  animation: wave-slide var(--wave-speed, 22s) linear infinite;
+}
+.ray {
+  position: absolute;
+  top: -20%;
+  height: 140%;
+  width: var(--w, 14vw);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0));
+  filter: blur(18px);
+  mix-blend-mode: soft-light;
+  transform-origin: 50% 0;
+  animation: ray-sway var(--d, 14s) ease-in-out infinite;
+  animation-delay: var(--dl, 0s);
+}
+.shine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 40%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.55), transparent);
+  animation: shine 5s var(--ease-io) infinite;
+}
+
+/* Hide scrollbars on horizontal scrollers */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* ------------------------------------------------------------------ */
+/* Motion accessibility                                                */
+/* Applies for prefers-reduced-motion AND the footer "Reduce motion"   */
+/* toggle (sets data-reduce-motion on <html>).                         */
+/* ------------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .motion-decor {
+    display: none !important;
+  }
+}
+html[data-reduce-motion="true"] {
+  scroll-behavior: auto;
+}
+html[data-reduce-motion="true"] *,
+html[data-reduce-motion="true"] *::before,
+html[data-reduce-motion="true"] *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+html[data-reduce-motion="true"] .motion-decor {
+  display: none !important;
+}
+
+/* Custom cursor only on fine pointers, never replaces the native one */
+@media (hover: none), (pointer: coarse) {
+  .cursor-layer {
+    display: none !important;
+  }
+}
