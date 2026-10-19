@@ -23,7 +23,7 @@ export default function ExportServicesPage() {
         eyebrow="Export & services"
         title="From Our Farm to Your Aquarium"
         text="Every stage - breeding, grading, quarantine, packing, documentation and air freight - is coordinated by one team, so you deal with one trusted partner."
-        image="/images/packing-station.jpg"
+        image="/images/bg/export.jpg"
       >
         <PrimaryCTA />
         <GhostButton href="/quality-assurance">Quality Assurance</GhostButton>

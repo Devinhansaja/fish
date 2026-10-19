@@ -1,6 +1,7 @@
-﻿"use client";
+"use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useRef, type MouseEvent, type ReactNode } from "react";
 import { Icon } from "./Icon";
 import { QUOTE_HREF } from "@/lib/site";
@@ -223,15 +224,20 @@ export function PageHero({
   return (
     <section className="on-dark relative overflow-hidden bg-deep pt-36 pb-28 sm:pt-44 sm:pb-36">
       {image && (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          src={image}
-          alt=""
-          className="absolute inset-0 h-full w-full object-cover opacity-30 mix-blend-luminosity"
-          aria-hidden="true"
-        />
+        <>
+          <Image src={image} alt="" aria-hidden="true" fill priority sizes="100vw" className="object-cover" />
+          {/* navy veil: strongest behind the left-aligned text, lighter on the right so the picture still shows */}
+          <div
+            className="absolute inset-0"
+            aria-hidden="true"
+            style={{
+              background:
+                "linear-gradient(90deg, rgba(7,26,51,.9) 0%, rgba(11,37,69,.72) 42%, rgba(11,37,69,.3) 100%), linear-gradient(180deg, rgba(7,26,51,.55) 0%, rgba(7,26,51,0) 35%, rgba(7,26,51,.35) 100%)",
+            }}
+          />
+        </>
       )}
-      <div className="absolute inset-0" style={{ background: "var(--grad-glow)" }} aria-hidden="true" />
+      {!image && <div className="absolute inset-0" style={{ background: "var(--grad-glow)" }} aria-hidden="true" />}
       <div className="container-x relative">
         <Reveal>
           <p className="eyebrow mb-4">{eyebrow}</p>

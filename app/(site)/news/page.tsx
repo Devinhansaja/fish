@@ -19,7 +19,7 @@ export default function NewsPage() {
         eyebrow="News & blog"
         title="Insights from the Farm"
         text="Fish care, grading, export know-how and sustainable aquaculture."
-        image="/images/numbered-tanks.jpg"
+        image="/images/bg/news.jpg"
       />
       <section className="section bg-white !pt-10">
         <div className="container-x">

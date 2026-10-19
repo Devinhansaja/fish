@@ -19,7 +19,7 @@ export default function GalleryPage() {
         eyebrow="Gallery"
         title="Inside the Aquazone Farm"
         text="Real photographs of our fish, tanks and people - from breeding facilities and fry grading to packing and community training."
-        image="/images/koi-pond.jpg"
+        image="/images/bg/gallery.jpg"
       />
       <section className="section bg-white !pt-10">
         <div className="container-x">

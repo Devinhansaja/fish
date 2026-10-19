@@ -45,3 +45,6 @@ next-env.d.ts
 
 # local tooling
 /.claude/
+
+# admin password hash (written by the admin panel)
+/data/admin.json

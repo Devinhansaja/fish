@@ -36,7 +36,7 @@ export default function ContactPage() {
         eyebrow="Contact us"
         title="Let's Talk About Your Next Shipment"
         text="Send an export inquiry and our team will respond with a quotation tailored to your market."
-        image="/images/aerated-tank.jpg"
+        image="/images/bg/contact.jpg"
       />
       <section className="section bg-mint !pt-6">
         <div className="container-x grid items-start gap-10 lg:grid-cols-[1.35fr_0.65fr]">

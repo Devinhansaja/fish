@@ -40,6 +40,8 @@ From there you can add a fish with all its details (names, category, availabilit
 featured on the home page), edit it, or delete it. Changes go live on the website immediately.
 
 * Fish data is stored in `data/species.json`; uploaded photos in `data/uploads/` (served at `/uploads/...`).
+* **Change password** is in the admin header. The new password (8+ characters) is stored as a salted hash in `data/admin.json`
+  (git-ignored) and overrides `ADMIN_PASSWORD`; changing it signs out every other browser. To reset it, delete `data/admin.json`.
 * Auth is one account with a signed, httpOnly session cookie (8 hours). **Before deploying set `ADMIN_USER`,
   `ADMIN_PASSWORD` and a long random `ADMIN_SECRET`** - the defaults are for local testing only.
 * Uploads are checked by their real file type (JPG/PNG/WebP, max 6 MB). Use only photos you own or are licensed to use.

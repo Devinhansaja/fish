@@ -371,12 +371,112 @@ function Editor({
 /* ------------------------------------------------------------------ */
 /* Dashboard                                                           */
 /* ------------------------------------------------------------------ */
+/* ------------------------------------------------------------------ */
+/* Change password                                                     */
+/* ------------------------------------------------------------------ */
+function ChangePassword({
+  onClose,
+  onDone,
+  onUnauthorized,
+}: {
+  onClose: () => void;
+  onDone: (message: string) => void;
+  onUnauthorized: () => void;
+}) {
+  const [busy, setBusy] = useState(false);
+  const [errors, setErrors] = useState<Errors>({});
+  const [show, setShow] = useState(false);
+
+  async function submit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const fd = new FormData(e.currentTarget);
+    const current = String(fd.get("current") ?? "");
+    const next = String(fd.get("next") ?? "");
+    const confirm = String(fd.get("confirm") ?? "");
+    if (next !== confirm) return setErrors({ confirm: "The two new passwords do not match." });
+    setBusy(true);
+    setErrors({});
+    try {
+      const res = await fetch("/api/admin/password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ current, next }),
+      });
+      if (res.status === 401) return onUnauthorized();
+      const json = (await res.json()) as { ok: boolean; message?: string; errors?: Errors };
+      if (!res.ok || !json.ok) {
+        setErrors(json.errors ?? { _: json.message ?? "Could not change the password." });
+        return;
+      }
+      onDone(json.message ?? "Password changed.");
+    } catch {
+      setErrors({ _: "Network error. Please try again." });
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  const type = show ? "text" : "password";
+  return (
+    <div
+      className="fixed inset-0 z-50 grid place-items-center bg-navy-900/60 p-4 backdrop-blur-sm"
+      onMouseDown={(e) => e.target === e.currentTarget && onClose()}
+      onKeyDown={(e) => e.key === "Escape" && onClose()}
+    >
+      <form
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="pw-title"
+        onSubmit={submit}
+        className="w-full max-w-md rounded-3xl bg-white p-7 text-navy shadow-2xl"
+      >
+        <h2 id="pw-title" className="text-2xl">
+          Change password
+        </h2>
+        <p className="mt-1 text-sm text-slate-500">You stay signed in here; any other signed-in browsers are signed out.</p>
+
+        <div className="mt-5 space-y-4">
+          <Field label="Current password" error={errors.current}>
+            <input name="current" type={type} autoComplete="current-password" required autoFocus className={inputCls} />
+          </Field>
+          <Field label="New password" error={errors.next} hint="At least 8 characters. A longer phrase is safer.">
+            <input name="next" type={type} autoComplete="new-password" required minLength={8} className={inputCls} />
+          </Field>
+          <Field label="Repeat new password" error={errors.confirm}>
+            <input name="confirm" type={type} autoComplete="new-password" required className={inputCls} />
+          </Field>
+          <label className="flex items-center gap-2 text-sm">
+            <input type="checkbox" checked={show} onChange={(e) => setShow(e.target.checked)} className="h-4 w-4 accent-[#00b4c6]" />
+            Show passwords
+          </label>
+        </div>
+
+        {errors._ && (
+          <p role="alert" className="mt-4 rounded-xl bg-[#fde8e5] p-3 text-sm font-semibold text-[#8c2118]">
+            {errors._}
+          </p>
+        )}
+
+        <div className="mt-6 flex items-center justify-end gap-3">
+          <button type="button" onClick={onClose} className="rounded-full px-5 py-2.5 font-semibold text-slate-600 hover:bg-slate-100">
+            Cancel
+          </button>
+          <button type="submit" disabled={busy} className="btn-cta disabled:opacity-70">
+            {busy ? "Saving..." : "Change password"}
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+}
+
 export function AdminApp({ initialAuthed, initialSpecies }: { initialAuthed: boolean; initialSpecies: Species[] }) {
   const [authed, setAuthed] = useState(initialAuthed);
   const [species, setSpecies] = useState<Species[]>(initialSpecies);
   const [editing, setEditing] = useState<Draft | null>(null);
   const [query, setQuery] = useState("");
   const [toast, setToast] = useState("");
+  const [pwOpen, setPwOpen] = useState(false);
 
   const flash = (m: string) => {
     setToast(m);
@@ -436,12 +536,26 @@ export function AdminApp({ initialAuthed, initialSpecies }: { initialAuthed: boo
             <a href="/" target="_blank" rel="noopener noreferrer" className="rounded-full px-3 py-1.5 hover:bg-white/10">
               View website &nearr;
             </a>
+            <button type="button" onClick={() => setPwOpen(true)} className="rounded-full px-3 py-1.5 hover:bg-white/10">
+              Change password
+            </button>
             <button type="button" onClick={logout} className="rounded-full border border-white/30 px-4 py-1.5 hover:bg-white/10">
               Sign out
             </button>
           </div>
         </div>
       </header>
+
+      {pwOpen && (
+        <ChangePassword
+          onClose={() => setPwOpen(false)}
+          onUnauthorized={expired}
+          onDone={(m) => {
+            setPwOpen(false);
+            flash(m);
+          }}
+        />
+      )}
 
       <main className="mx-auto max-w-6xl px-4 py-8">
         {editing ? (

@@ -34,7 +34,7 @@ export default function QualityPage() {
         eyebrow="Quality assurance"
         title="Every Fish Matters. Every Shipment Counts."
         text="Confidence for importers starts with fish health. Here is how quality is built into each step at Aquazone."
-        image="/images/glass-tanks.jpg"
+        image="/images/bg/quality.jpg"
       >
         <PrimaryCTA>Request Export Information</PrimaryCTA>
       </PageHero>

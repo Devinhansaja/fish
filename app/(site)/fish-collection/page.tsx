@@ -40,7 +40,7 @@ export default async function FishCollectionPage() {
         eyebrow="Our fish collection"
         title="A Living Collection for International Buyers"
         text="Koi, goldfish, tropical freshwater fish and selected Sri Lankan native species. Add the species you need to your quote list and request one consolidated quotation."
-        image="/images/koi-showa.jpg"
+        image="/images/bg/fish-collection.jpg"
       />
       <section className="section bg-white !pt-10" aria-label="Fish catalog">
         <div className="container-x">

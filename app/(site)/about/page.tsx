@@ -30,7 +30,7 @@ export default function AboutPage() {
         eyebrow="About Aquazone"
         title="A Sri Lankan Exporter Built on Fish Health and Community"
         text="Aquazone Ornamental Fish Farm (Pvt) Ltd breeds, conditions and exports high-quality live freshwater ornamental fish to wholesalers, distributors and retailers across the globe."
-        image="/images/shade-house.jpg"
+        image="/images/bg/about.jpg"
       >
         <PrimaryCTA />
         <GhostButton href="/export-services">Our Export Services</GhostButton>

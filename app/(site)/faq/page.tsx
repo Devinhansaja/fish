@@ -35,7 +35,7 @@ export default function FaqPage() {
         eyebrow="FAQ"
         title="Questions International Buyers Ask"
         text="Ordering, packing, shipping, documents and payment - in plain language."
-        image="/images/aerated-tank.jpg"
+        image="/images/bg/faq.jpg"
       />
       <section className="section bg-white !pt-10">
         <div className="container-x">

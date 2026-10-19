@@ -34,7 +34,7 @@ export default function SustainabilityPage() {
         eyebrow="Sustainability"
         title="Growing Together. Protecting Tomorrow."
         text="Healthy fish, healthy waters and healthy communities: our supply chain is built so that growth benefits the people and places behind it."
-        image="/images/farm-landscape.jpg"
+        image="/images/bg/sustainability.jpg"
       />
 
       <section className="section overflow-hidden !pt-10" style={{ background: "linear-gradient(180deg,#ffffff,#eefffc 60%,#dff8ea)" }}>

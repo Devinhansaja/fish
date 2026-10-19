@@ -19,6 +19,7 @@ const content: Record<
     title: string;
     text: string;
     plannedTitle: string;
+    image: string;
     planned: { icon: IconName; title: string; body: string }[];
     other: { href: string; label: string };
     note: string;
@@ -37,6 +38,7 @@ const content: Record<
       { icon: "water", title: "Mosses & ferns", body: "Easy plants for wood, rock and nano tanks." },
       { icon: "box", title: "Bulk & mixed packs", body: "Wholesale packing for importers and retailers." },
     ],
+    image: "/images/bg/aquarium-plants.jpg",
     other: { href: "/aquarium-accessories", label: "See aquarium accessories" },
     note: "Live-plant exports usually need plant-health documentation for the destination market. Details will be confirmed before launch.",
   },
@@ -53,6 +55,7 @@ const content: Record<
       { icon: "drop", title: "Water care & fish food", body: "Conditioners, test kits and nutrition." },
       { icon: "box", title: "Bulk & mixed orders", body: "Consolidated shipments alongside live fish." },
     ],
+    image: "/images/bg/fish-collection.jpg", // TODO: add a dedicated accessories banner (e.g. public/images/bg/aquarium-accessories.jpg)
     other: { href: "/aquarium-plants", label: "See aquarium plants" },
     note: "Product specifications, brands and packing details will be published when the range is confirmed.",
   },
@@ -109,7 +112,7 @@ export function ComingSoon({ kind }: { kind: Kind }) {
   const c = content[kind];
   return (
     <>
-      <PageHero eyebrow={c.eyebrow} title={c.title} text={c.text} image="/images/aerated-tank.jpg">
+      <PageHero eyebrow={c.eyebrow} title={c.title} text={c.text} image={c.image}>
         <span className="draft-badge !bg-sun !px-4 !py-1.5 !text-sm">Coming soon</span>
         <GhostButton href="/fish-collection">Browse our fish</GhostButton>
       </PageHero>
