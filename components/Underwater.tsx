@@ -229,7 +229,6 @@ type Swimmer = {
 const swimmers: Swimmer[] = [
   { kind: "tang", top: 20, dur: 46, delay: -8, size: 96, rtl: false, amp: 20, depth: 1.2 },
   { kind: "clown", top: 60, dur: 58, delay: -30, size: 88, rtl: true, amp: 14, depth: 0.9 },
-  { kind: "orange", top: 74, dur: 42, delay: -16, size: 80, rtl: false, amp: 18, depth: 1.1 },
   { kind: "angel", top: 40, dur: 66, delay: -42, size: 92, rtl: true, amp: 12, depth: 0.6 },
   { kind: "ray", top: 86, dur: 80, delay: -22, size: 150, rtl: false, amp: 10, depth: 0.5 },
 ];

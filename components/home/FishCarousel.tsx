@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState, type PointerEvent as RPointerEvent } from "react";
-import { featuredSpecies } from "@/lib/species";
+import { useSpecies } from "../SpeciesProvider";
 import { FishCard } from "../catalog/FishCard";
 import { Icon } from "../Icon";
 import { useActive } from "../Underwater";
@@ -12,6 +12,7 @@ import { useMotionPrefs } from "../MotionProvider";
  * mouse drag, an "active card" emphasis effect and a slow autoplay that pauses on interaction.
  */
 export function FishCarousel() {
+  const { featured: featuredSpecies } = useSpecies();
   const scroller = useRef<HTMLDivElement>(null);
   const wrap = useRef<HTMLDivElement>(null);
   const active = useActive(wrap);

@@ -37,10 +37,19 @@ export const site = {
   profilePdf: process.env.NEXT_PUBLIC_PROFILE_PDF ?? null,
 } as const;
 
-export const nav = [
+export type NavItem = { label: string; href: string; /** page exists but the range is not launched yet */ soon?: boolean };
+
+/** Product ranges. Shown as a "Products" dropdown in the header and flat in the footer / mobile menu. */
+export const productNav: NavItem[] = [
+  { label: "Fish Collection", href: "/fish-collection" },
+  { label: "Aquarium Plants", href: "/aquarium-plants", soon: true },
+  { label: "Aquarium Accessories", href: "/aquarium-accessories", soon: true },
+];
+
+export const nav: NavItem[] = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about" },
-  { label: "Fish Collection", href: "/fish-collection" },
+  ...productNav,
   { label: "Export & Services", href: "/export-services" },
   { label: "Sustainability", href: "/sustainability" },
   { label: "Quality Assurance", href: "/quality-assurance" },
@@ -48,7 +57,7 @@ export const nav = [
   { label: "News & Blog", href: "/news" },
   { label: "FAQ", href: "/faq" },
   { label: "Contact Us", href: "/contact" },
-] as const;
+];
 
 export const QUOTE_HREF = "/contact#inquiry";
 

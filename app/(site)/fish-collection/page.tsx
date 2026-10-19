@@ -5,7 +5,7 @@ import { PageHero } from "@/components/ui";
 import { Reveal } from "@/components/Reveal";
 import { JsonLd, breadcrumbLd } from "@/components/JsonLd";
 import { SITE_URL } from "@/lib/site";
-import { species } from "@/lib/species";
+import { readSpecies } from "@/lib/speciesStore";
 
 export const metadata: Metadata = {
   title: "Ornamental Fish Collection - Koi, Goldfish & Tropical Freshwater Fish",
@@ -14,7 +14,8 @@ export const metadata: Metadata = {
   alternates: { canonical: "/fish-collection" },
 };
 
-export default function FishCollectionPage() {
+export default async function FishCollectionPage() {
+  const species = await readSpecies();
   return (
     <>
       <JsonLd

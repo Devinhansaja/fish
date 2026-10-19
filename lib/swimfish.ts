@@ -4,7 +4,6 @@ export const swimFish = {
   angel: { file: "blue", faces: "right" },
   ray: { file: "ray", faces: "right" },
   clown: { file: "clown", faces: "right" },
-  orange: { file: "orange", faces: "right" },
 } as const;
 
 export type FishKind = keyof typeof swimFish;

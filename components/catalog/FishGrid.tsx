@@ -2,7 +2,8 @@
 
 import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 import { useMemo, useState } from "react";
-import { categories, species, type Availability, type CategoryId } from "@/lib/species";
+import { categories, type Availability, type CategoryId } from "@/lib/species";
+import { useSpecies } from "../SpeciesProvider";
 import { FishCard } from "./FishCard";
 import { Icon } from "../Icon";
 import { FishIllustration } from "../Underwater";
@@ -29,6 +30,7 @@ function sizeBand(text: string): SizeBand {
 const groups = ["All", "Tropical Freshwater Fish", "Koi & Goldfish", "Sri Lankan Native Species"] as const;
 
 export function FishGrid() {
+  const { species } = useSpecies();
   const [q, setQ] = useState("");
   const [group, setGroup] = useState<(typeof groups)[number]>("All");
   const [cat, setCat] = useState<CategoryId | "all">("all");
@@ -54,7 +56,7 @@ export function FishGrid() {
       }
       return true;
     });
-  }, [q, group, cat, size, avail, origin]);
+  }, [species, q, group, cat, size, avail, origin]);
 
   const activeCount = [q, group !== "All", cat !== "all", size !== "all", avail !== "all", origin !== "all"].filter(Boolean).length;
 

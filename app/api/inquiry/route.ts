@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { NotConfiguredError, deliver, rateLimited, verifyTurnstile } from "@/lib/deliver";
-import { species } from "@/lib/species";
+import { readSpecies } from "@/lib/speciesStore";
 import { buyerTypes } from "@/lib/site";
 
 export const runtime = "nodejs";
@@ -46,6 +46,7 @@ export async function POST(req: Request) {
   };
   // species: [{ slug, qty }] (a plain slug string is also accepted, quantity then unspecified)
   const rawItems = Array.isArray(body.species) ? (body.species as unknown[]) : [];
+  const species = await readSpecies();
   const requested = rawItems
     .map((x) =>
       typeof x === "string"

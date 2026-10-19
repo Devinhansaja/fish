@@ -3,10 +3,6 @@ import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
 import { SITE_URL, site } from "@/lib/site";
 import { MotionProvider } from "@/components/MotionProvider";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
-import { AmbientFish, CustomCursor, FloatingWhatsApp, ScrollProgress } from "@/components/GlobalEffects";
-import { JsonLd, organizationLd } from "@/components/JsonLd";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -57,21 +53,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${poppins.variable} ${inter.variable}`} suppressHydrationWarning>
       <body>
-        <MotionProvider>
-          <a href="#main" className="skip-link">
-            Skip to content
-          </a>
-          <ScrollProgress />
-          <Header />
-          <main id="main">{children}</main>
-          <Footer />
-          <AmbientFish />
-          <FloatingWhatsApp />
-          <CustomCursor />
-          <JsonLd data={organizationLd} />
-        </MotionProvider>
+        <MotionProvider>{children}</MotionProvider>
       </body>
     </html>
   );
 }
-

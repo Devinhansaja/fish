@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { species, getSpecies, categoryLabel, relatedSpecies } from "@/lib/species";
+import { categoryLabel, relatedSpecies } from "@/lib/species";
+import { getSpeciesBySlug, readSpecies } from "@/lib/speciesStore";
 import { SpeciesGallery, SpeciesInquiryPanel, SpeciesSpecs } from "@/components/catalog/SpeciesDetail";
 import { FishCard } from "@/components/catalog/FishCard";
 import { FinalCTA } from "@/components/Sections";
@@ -9,13 +10,13 @@ import { JsonLd, breadcrumbLd } from "@/components/JsonLd";
 import { Reveal } from "@/components/Reveal";
 import { SITE_URL } from "@/lib/site";
 
-export function generateStaticParams() {
-  return species.map((s) => ({ slug: s.slug }));
+export async function generateStaticParams() {
+  return (await readSpecies()).map((s) => ({ slug: s.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const s = getSpecies(slug);
+  const s = await getSpeciesBySlug(slug);
   if (!s) return {};
   return {
     title: `${s.commonName} (${s.scientificName}) - Export Supplier`,
@@ -27,9 +28,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function SpeciesPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const s = getSpecies(slug);
+  const all = await readSpecies();
+  const s = all.find((x) => x.slug === slug);
   if (!s) notFound();
-  const related = relatedSpecies(s);
+  const related = relatedSpecies(all, s);
 
   return (
     <>

@@ -33,6 +33,20 @@ Copy `.env.example` to `.env.local` and fill in what you have.
 Design tokens (Ocean Navy `#0B2545`, Tropical Aqua `#00B4C6`, Coral `#FF7B63`, Sunshine `#FFD166`, Soft Mint `#EEFFFC`) live in `app/globals.css`.
 Coral is used **only** for primary conversion actions.
 
+## Admin panel (add / edit / delete fish)
+
+Open **http://localhost:3000/admin** and sign in (default user `admin`, password `123`).
+From there you can add a fish with all its details (names, category, availability, size, water, feeding, photos,
+featured on the home page), edit it, or delete it. Changes go live on the website immediately.
+
+* Fish data is stored in `data/species.json`; uploaded photos in `data/uploads/` (served at `/uploads/...`).
+* Auth is one account with a signed, httpOnly session cookie (8 hours). **Before deploying set `ADMIN_USER`,
+  `ADMIN_PASSWORD` and a long random `ADMIN_SECRET`** - the defaults are for local testing only.
+* Uploads are checked by their real file type (JPG/PNG/WebP, max 6 MB). Use only photos you own or are licensed to use.
+* The file store suits one Node server (local PC, VPS). On read-only/serverless hosting (e.g. Vercel) replace the four
+  functions in `lib/speciesStore.ts` with a database; nothing else needs to change.
+* `/admin` is excluded from search engines (`robots.txt` + `noindex`).
+
 ## Inquiry form delivery (required before launch)
 
 The form never pretends to succeed. Configure one or both:
@@ -61,7 +75,7 @@ Nothing below was invented; placeholders are labelled "TBC / Draft / Pending" on
 
 ## Swimming fish videos
 
-Five supplied fish animations (blue tang, angelfish, stingray, clownfish, cartoon orange fish) swim across the hero and,
+Four supplied fish animations (blue tang, angelfish, stingray, clownfish) swim across the hero and,
 smaller, across every page (`components/Underwater.tsx` `FishSwarm`, `components/GlobalEffects.tsx` `AmbientFish`).
 
 * The source MP4s had a checkerboard baked into the pixels, so the background was keyed out frame by frame and exported as

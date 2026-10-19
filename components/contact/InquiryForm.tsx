@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Script from "next/script";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { buyerTypes } from "@/lib/site";
-import { species } from "@/lib/species";
+import { useSpecies } from "../SpeciesProvider";
 import { DEFAULT_QTY, useQuoteList } from "../InquiryList";
 import { QtyStepper } from "../QtyStepper";
 import { PrimaryCTA } from "../ui";
@@ -41,6 +41,7 @@ function Field({
 
 export function InquiryForm() {
   const { items, list, remove, add, clear, setItem } = useQuoteList();
+  const { species, bySlug } = useSpecies();
   const [errors, setErrors] = useState<Errors>({});
   const [state, setState] = useState<"idle" | "loading" | "ok" | "error">("idle");
   const [message, setMessage] = useState("");
@@ -186,7 +187,7 @@ export function InquiryForm() {
                 <ul className="space-y-2">
                   <AnimatePresence initial={false}>
                     {items.map((q) => {
-                      const s = species.find((x) => x.slug === q.slug);
+                      const s = bySlug(q.slug);
                       if (!s) return null;
                       return (
                         <motion.li

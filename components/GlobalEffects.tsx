@@ -143,7 +143,6 @@ export function FloatingWhatsApp() {
 /* (decorative, never blocks clicks, hidden for reduced motion)         */
 /* ------------------------------------------------------------------ */
 const lanes: { kind: FishKind; top: string; width: number; dur: number; delay: number; rtl: boolean; amp: number }[] = [
-  { kind: "orange", top: "58%", width: 68, dur: 52, delay: -12, rtl: false, amp: 18 },
   { kind: "tang", top: "80%", width: 58, dur: 74, delay: -40, rtl: true, amp: 12 },
   { kind: "clown", top: "36%", width: 64, dur: 64, delay: -26, rtl: false, amp: 14 },
   { kind: "angel", top: "70%", width: 66, dur: 88, delay: -58, rtl: true, amp: 10 },

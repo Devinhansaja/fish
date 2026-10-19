@@ -6,18 +6,20 @@ import { useEffect, useRef, useState } from "react";
 import { Icon } from "./Icon";
 import { useQuoteList } from "./InquiryList";
 import { QtyStepper } from "./QtyStepper";
-import { species } from "@/lib/species";
+import type { Species } from "@/lib/species";
+import { useSpecies } from "./SpeciesProvider";
 import { QUOTE_BUMP_EVENT } from "@/lib/flyFish";
 import { ease } from "@/lib/motion";
 
 /** Header "cart" = the buyer's quote list. Click to review, remove or send the quote request. */
 export function HeaderCart() {
   const { items: quote, list, remove, clear, setItem } = useQuoteList();
+  const { bySlug } = useSpecies();
   const [open, setOpen] = useState(false);
   const wrap = useRef<HTMLDivElement>(null);
   const items = quote
-    .map((q) => ({ s: species.find((x) => x.slug === q.slug), qty: q.qty }))
-    .filter((x): x is { s: (typeof species)[number]; qty: number } => !!x.s);
+    .map((q) => ({ s: bySlug(q.slug), qty: q.qty }))
+    .filter((x): x is { s: Species; qty: number } => !!x.s);
   const totalPcs = items.reduce((n, x) => n + x.qty, 0);
 
   // bump when a swimming fish arrives

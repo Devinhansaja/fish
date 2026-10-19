@@ -80,6 +80,7 @@ export function Footer() {
                 <li key={n.href}>
                   <Link href={n.href} className="text-white/80 no-underline transition hover:text-aqua-300">
                     {n.label}
+                    {n.soon && <span className="ml-2 rounded-full bg-sun px-2 py-0.5 align-middle text-[0.6rem] font-extrabold uppercase tracking-wider text-navy">Soon</span>}
                   </Link>
                 </li>
               ))}

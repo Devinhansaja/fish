@@ -3,14 +3,45 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
-import { nav } from "@/lib/site";
+import { Fragment, useEffect, useRef, useState } from "react";
+import { nav, productNav } from "@/lib/site";
 import { Logo } from "./Logo";
 import { PrimaryCTA } from "./ui";
 import { Icon } from "./Icon";
 import { HeaderCart } from "./HeaderCart";
 import { SHOW_HEADER_EVENT } from "@/lib/flyFish";
 import { ease } from "@/lib/motion";
+
+/** Desktop "Products" dropdown (CSS only: opens on hover and on keyboard focus). */
+function ProductsMenu({ isActive }: { isActive: (href: string) => boolean }) {
+  const active = productNav.some((p) => isActive(p.href));
+  return (
+    <div className="group relative">
+      <Link href="/fish-collection" className="nav-link inline-flex items-center gap-1" aria-haspopup="true" aria-current={active ? "page" : undefined}>
+        Products
+        <svg viewBox="0 0 12 8" className="h-2 w-3 transition-transform duration-300 group-hover:rotate-180 group-focus-within:rotate-180" aria-hidden="true">
+          <path d="m1 1 5 5 5-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+        </svg>
+        {active && <span className="absolute -bottom-1 left-1/2 h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-sun" />}
+      </Link>
+      <div className="invisible absolute left-1/2 top-full z-50 w-64 -translate-x-1/2 translate-y-2 pt-3 opacity-0 transition-all duration-300 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
+        <ul className="overflow-hidden rounded-2xl bg-white p-2 text-navy shadow-2xl ring-1 ring-navy/10">
+          {productNav.map((p) => (
+            <li key={p.href}>
+              <Link
+                href={p.href}
+                className={`flex items-center justify-between gap-3 rounded-xl px-4 py-3 text-[0.95rem] font-semibold text-navy no-underline transition hover:bg-mint ${isActive(p.href) ? "bg-mint" : ""}`}
+              >
+                {p.label}
+                {p.soon && <span className="rounded-full bg-sun px-2 py-0.5 text-[0.65rem] font-extrabold uppercase tracking-wider">Soon</span>}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}
 
 export function Header() {
   const pathname = usePathname();
@@ -76,23 +107,22 @@ export function Header() {
 
             <nav aria-label="Main" className="hidden items-center gap-x-5 xl:flex">
               {nav
-                .filter((n) => n.href !== "/contact")
+                .filter((n) => n.href !== "/contact" && !productNav.some((p) => p.href === n.href))
                 .map((n) => (
-                  <Link
-                    key={n.href}
-                    href={n.href}
-                    className="nav-link"
-                    aria-current={isActive(n.href) ? "page" : undefined}
-                  >
-                    {n.label === "Export & Services" ? "Export" : n.label === "Quality Assurance" ? "Quality" : n.label === "News & Blog" ? "News" : n.label}
-                    {isActive(n.href) && (
-                      <motion.span
-                        layoutId="nav-bubble"
-                        className="absolute -bottom-1 left-1/2 h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-sun"
-                        transition={{ type: "spring", stiffness: 380, damping: 28 }}
-                      />
-                    )}
-                  </Link>
+                  <Fragment key={n.href}>
+                    <Link href={n.href} className="nav-link" aria-current={isActive(n.href) ? "page" : undefined}>
+                      {n.label === "Export & Services" ? "Export" : n.label === "Quality Assurance" ? "Quality" : n.label === "News & Blog" ? "News" : n.label}
+                      {isActive(n.href) && (
+                        <motion.span
+                          layoutId="nav-bubble"
+                          className="absolute -bottom-1 left-1/2 h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-sun"
+                          transition={{ type: "spring", stiffness: 380, damping: 28 }}
+                        />
+                      )}
+                    </Link>
+                    {/* Products dropdown sits right after "About Us" */}
+                    {n.href === "/about" && <ProductsMenu isActive={isActive} />}
+                  </Fragment>
                 ))}
               <Link href="/contact" className="nav-link" aria-current={isActive("/contact") ? "page" : undefined}>
                 Contact
@@ -183,7 +213,10 @@ export function Header() {
                     className={`flex items-center justify-between border-b border-white/10 py-3 text-2xl font-semibold no-underline ${isActive(n.href) ? "text-sun" : "text-white"}`}
                     style={{ fontFamily: "var(--font-poppins)" }}
                   >
-                    {n.label}
+                    <span className="flex items-center gap-3">
+                      {n.label}
+                      {n.soon && <span className="rounded-full bg-sun px-2.5 py-0.5 text-[0.65rem] font-extrabold uppercase tracking-wider text-navy">Soon</span>}
+                    </span>
                     <Icon name="arrow" size={20} />
                   </Link>
                 </motion.div>

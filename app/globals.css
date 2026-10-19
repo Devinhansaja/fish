@@ -434,6 +434,15 @@ h4 {
     opacity: calc(var(--o0, 0.18) + 0.1);
   }
 }
+@keyframes plant-sway {
+  0%,
+  100% {
+    transform: rotate(-4deg) skewX(-2deg);
+  }
+  50% {
+    transform: rotate(5deg) skewX(3deg);
+  }
+}
 @keyframes float-y {
   0%,
   100% {

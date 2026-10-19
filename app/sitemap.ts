@@ -1,10 +1,11 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL, nav } from "@/lib/site";
-import { species } from "@/lib/species";
+import { readSpecies } from "@/lib/speciesStore";
 import { posts } from "@/lib/content";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
+  const species = await readSpecies();
   return [
     ...nav.map((n) => ({
       url: `${SITE_URL}${n.href === "/" ? "" : n.href}`,
