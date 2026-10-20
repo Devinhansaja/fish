@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -104,25 +104,25 @@ export function SpeciesSpecs({ s }: { s: Species }) {
   ];
   return (
     <div>
-      <Stagger gap={0.06} className="overflow-hidden rounded-3xl border border-navy/10 bg-white shadow-sm">
+      <Stagger gap={0.06} className="overflow-hidden rounded-3xl border border-ink/10 bg-surface shadow-sm">
         {rows.map(([k, v], idx) => (
           <StaggerItem key={k} dir="fade">
-            <div className={`grid gap-1 px-6 py-4 sm:grid-cols-[11rem_1fr] sm:gap-6 ${idx % 2 ? "bg-white" : "bg-mint"}`}>
+            <div className={`grid gap-1 px-6 py-4 sm:grid-cols-[11rem_1fr] sm:gap-6 ${idx % 2 ? "bg-surface" : "bg-alt"}`}>
               <span className="text-sm font-bold uppercase tracking-wider text-aqua-700">{k}</span>
-              <span className="text-navy">{v}</span>
+              <span className="text-ink">{v}</span>
             </div>
           </StaggerItem>
         ))}
       </Stagger>
       {!s.careVerified && (
-        <p className="mt-4 flex items-start gap-3 rounded-2xl bg-sun/30 p-4 text-sm text-navy">
+        <p className="mt-4 flex items-start gap-3 rounded-2xl bg-sun/30 p-4 text-sm text-ink">
           <span className="draft-badge shrink-0">Draft</span>
           Care and size information is a general reference range and has not yet been confirmed by Aquazone. Confirm
           specifications and availability in your quotation request.
         </p>
       )}
       {s.exportCheckRequired && (
-        <p className="mt-3 flex items-start gap-3 rounded-2xl bg-aqua/10 p-4 text-sm text-navy">
+        <p className="mt-3 flex items-start gap-3 rounded-2xl bg-aqua/10 p-4 text-sm text-ink">
           <span className="draft-badge shrink-0">Check</span>
           Native/endemic species are subject to legal export requirements. Export status will be confirmed before shipment.
         </p>
@@ -158,7 +158,7 @@ export function SpeciesInquiryPanel({ s }: { s: Species }) {
           onClick={() => setDialog(true)}
           aria-pressed={inList}
           aria-haspopup="dialog"
-          className={`inline-flex items-center justify-center gap-2 rounded-full border-2 px-5 py-3 font-semibold transition ${inList ? "border-aqua bg-aqua/15 text-aqua-700" : "border-navy/20 text-navy hover:border-aqua"}`}
+          className={`inline-flex items-center justify-center gap-2 rounded-full border-2 px-5 py-3 font-semibold transition ${inList ? "border-aqua bg-aqua/15 text-aqua-700" : "border-ink/20 text-ink hover:border-aqua"}`}
         >
           <Icon name={inList ? "check" : "plus"} size={18} strokeWidth={2.4} />
           {inList ? `In your quote list · ${qty.toLocaleString("en-US")} pcs (edit)` : "Add to quote list"}

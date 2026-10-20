@@ -9,7 +9,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Contact & Export Inquiry - Request a Quotation",
   description:
-    "Contact Aquazone Ornamental Fish Farm (Pvt) Ltd in Nelawa, Kohilagethera, Sri Lanka. Request a quotation for live ornamental fish export.",
+    "Contact Aquazone Ornamental Fish Farm (Pvt) Ltd in Nelawa, Kohilegedara, Sri Lanka. Request a quotation for live ornamental fish export.",
   alternates: { canonical: "/contact" },
 };
 
@@ -21,7 +21,7 @@ function Row({ icon, label, children }: { icon: IconName; label: string; childre
       </span>
       <div>
         <p className="text-sm font-bold uppercase tracking-wider text-aqua-700">{label}</p>
-        <div className="mt-0.5 text-navy">{children}</div>
+        <div className="mt-0.5 text-ink">{children}</div>
       </div>
     </div>
   );
@@ -38,7 +38,7 @@ export default function ContactPage() {
         text="Send an export inquiry and our team will respond with a quotation tailored to your market."
         image="/images/bg/contact.jpg"
       />
-      <section className="section bg-mint !pt-6">
+      <section className="section bg-alt !pt-6">
         <div className="container-x grid items-start gap-10 lg:grid-cols-[1.35fr_0.65fr]">
           <InquiryForm />
 
@@ -89,7 +89,7 @@ export default function ContactPage() {
                   <div className="grid h-72 place-items-center bg-deep p-6 text-center text-white">
                     <div>
                       <Icon name="pin" size={36} className="mx-auto text-sun" />
-                      <p className="mt-3 font-semibold">Nelawa, Kohilagethera, Sri Lanka</p>
+                      <p className="mt-3 font-semibold">{site.address.line1}, {site.address.country}</p>
                       <p className="mt-1 text-sm text-white/75">
                         Google Map will appear here once the official location is confirmed.
                       </p>

@@ -7,6 +7,8 @@ import { StoryTimeline } from "@/components/StoryTimeline";
 import { FinalCTA } from "@/components/Sections";
 import { Icon } from "@/components/Icon";
 import { JsonLd, breadcrumbLd } from "@/components/JsonLd";
+import { Hl } from "@/components/Hl";
+import { Credentials } from "@/components/about/Credentials";
 
 export const metadata: Metadata = {
   title: "About Aquazone - Sri Lankan Ornamental Fish Exporter",
@@ -37,11 +39,11 @@ export default function AboutPage() {
       </PageHero>
 
       {/* Introduction */}
-      <section className="section bg-white !pt-10">
+      <section className="section bg-surface !pt-10">
         <div className="container-x grid items-center gap-14 lg:grid-cols-2">
           <Reveal dir="left">
             <p className="eyebrow mb-4">Company profile</p>
-            <h2 className="h2">Premier, Government-Registered, Export-Ready</h2>
+            <h2 className="h2"><Hl>Premier, Government-Registered, Export-Ready</Hl></h2>
             <p className="mt-6 text-lg text-muted">
               Capitalising on Sri Lanka&apos;s ideal tropical climate, abundant natural water resources and rich biodiversity,
               we specialise in breeding, conditioning and exporting a diverse array of vibrant aquatic life.
@@ -50,14 +52,26 @@ export default function AboutPage() {
               Our advanced biosecurity facilities and quarantine stations are designed to meet international standards,
               so that we deliver exceptionally healthy livestock to buyers worldwide.
             </p>
-            <p className="mt-4 text-sm text-muted">
-              <span className="draft-badge mr-2">Confirm</span>
-              Registration number and licence details to be added by Aquazone.
+            <p className="mt-6">
+              <a href="#credentials" className="link-aqua font-semibold">View our registration and licences</a>
             </p>
           </Reveal>
           <WaterReveal className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-2xl">
             <Image src="/images/tank-hall-b.jpg" alt="Multi-level glass tank racks inside a bright, shaded Aquazone facility" fill sizes="(min-width:1024px) 40vw, 90vw" className="object-cover" />
           </WaterReveal>
+        </div>
+      </section>
+
+      {/* Registration & licences */}
+      <section id="credentials" className="section scroll-mt-24 bg-alt">
+        <div className="container-x">
+          <SectionHeading
+            eyebrow="Registration & licences"
+            title="Officially Registered and Licensed"
+            text="Aquazone Ornamental Fish Farm (Private) Limited is a registered Sri Lankan company, licensed to operate its aquaculture facility. Select a certificate to view the full document."
+            align="center"
+          />
+          <Credentials />
         </div>
       </section>
 
@@ -88,7 +102,7 @@ export default function AboutPage() {
       </section>
 
       {/* Story */}
-      <section className="section bg-mint">
+      <section className="section bg-alt">
         <div className="container-x">
           <SectionHeading eyebrow="Our story" title="From a Few Breeding Tanks to a Modern Export Enterprise" align="center" />
           <div className="mt-14">
@@ -102,7 +116,7 @@ export default function AboutPage() {
       </section>
 
       {/* Values */}
-      <section className="section bg-white">
+      <section className="section bg-surface">
         <div className="container-x">
           <SectionHeading eyebrow="Core values" title="What Guides Every Shipment" align="center" />
           <FeatureCards />
@@ -110,7 +124,7 @@ export default function AboutPage() {
       </section>
 
       {/* Management */}
-      <section className="section bg-mint">
+      <section className="section bg-alt">
         <div className="container-x">
           <SectionHeading
             eyebrow="Management & expertise"
@@ -135,7 +149,7 @@ export default function AboutPage() {
       </section>
 
       {/* Community */}
-      <section className="section bg-white">
+      <section className="section bg-surface">
         <div className="container-x grid items-center gap-14 lg:grid-cols-2">
           <div className="grid grid-cols-2 gap-4">
             <WaterReveal className="relative col-span-2 aspect-[16/9] overflow-hidden rounded-3xl shadow-xl">
@@ -150,7 +164,7 @@ export default function AboutPage() {
           </div>
           <Reveal dir="right">
             <p className="eyebrow mb-4">Community &amp; livelihood impact</p>
-            <h2 className="h2">Not Just Exporting Fish - Empowering Households</h2>
+            <h2 className="h2"><Hl>Not Just Exporting Fish - Empowering Households</Hl></h2>
             <p className="mt-6 text-lg text-muted">
               At the heart of Aquazone&apos;s business model is a deep commitment to socio-economic development across Sri
               Lanka. We have built an outgrower ecosystem where local families and rural livelihoods grow alongside us.
@@ -166,11 +180,11 @@ export default function AboutPage() {
       </section>
 
       {/* Export expertise + why */}
-      <section className="section bg-mint">
+      <section className="section bg-alt">
         <div className="container-x grid gap-12 lg:grid-cols-2">
           <Reveal dir="left">
             <p className="eyebrow mb-4">Export experience</p>
-            <h2 className="h2">Complex, Time-Sensitive Supply Chains - Handled</h2>
+            <h2 className="h2"><Hl>Complex, Time-Sensitive Supply Chains - Handled</Hl></h2>
             <p className="mt-6 text-lg text-muted">
               Aquazone has experience managing time-sensitive international supply chains and navigating veterinary,
               customs and biosecurity regulations of diverse markets. Our logistics framework uses engineered packing
@@ -201,7 +215,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <FinalCTA fill="#eefffc" />
+      <FinalCTA fill="var(--alt)" />
     </>
   );
 }

@@ -14,7 +14,7 @@ export function FAQAccordion({ items }: { items: Faq[] }) {
         const isOpen = open === i;
         const id = `${base}-${i}`;
         return (
-          <div key={f.q} className="relative overflow-hidden rounded-2xl border border-navy/10 bg-white shadow-sm">
+          <div key={f.q} className="relative overflow-hidden rounded-2xl border border-ink/10 bg-surface shadow-sm">
             <motion.span
               aria-hidden="true"
               className="absolute left-0 top-0 w-1 origin-top bg-aqua"
@@ -29,7 +29,7 @@ export function FAQAccordion({ items }: { items: Faq[] }) {
                 aria-expanded={isOpen}
                 aria-controls={`${id}-panel`}
                 onClick={() => setOpen(isOpen ? null : i)}
-                className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left text-lg font-semibold text-navy"
+                className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left text-lg font-semibold text-ink"
                 style={{ fontFamily: "var(--font-poppins)" }}
               >
                 <span>{f.q}</span>

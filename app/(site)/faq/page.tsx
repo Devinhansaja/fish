@@ -37,7 +37,7 @@ export default function FaqPage() {
         text="Ordering, packing, shipping, documents and payment - in plain language."
         image="/images/bg/faq.jpg"
       />
-      <section className="section bg-white !pt-10">
+      <section className="section bg-surface !pt-10">
         <div className="container-x">
           <FAQAccordion items={faqs} />
           <div className="mt-12 text-center">

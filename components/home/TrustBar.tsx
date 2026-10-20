@@ -50,7 +50,7 @@ export function AnimatedCounter({ stat }: { stat: Stat }) {
 
 export function TrustBar() {
   return (
-    <section className="relative bg-mint pb-8 pt-4" aria-label="Company highlights">
+    <section className="relative bg-alt pb-8 pt-4" aria-label="Company highlights">
       <div className="container-x">
         <Stagger className="grid gap-4 sm:grid-cols-2 xl:grid-cols-5" gap={0.09}>
           {trust.map((t) => (
@@ -61,7 +61,7 @@ export function TrustBar() {
                   <Icon name={t.icon} size={24} style={{ animation: "float-y 5s ease-in-out infinite" }} />
                 </span>
                 <span>
-                  <span className="block text-[0.95rem] font-bold leading-snug text-navy">{t.label}</span>
+                  <span className="block text-[0.95rem] font-bold leading-snug text-ink">{t.label}</span>
                   <span className="mt-1 block text-sm text-muted">{t.note}</span>
                 </span>
               </div>

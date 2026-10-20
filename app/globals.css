@@ -3,7 +3,8 @@
 /* ------------------------------------------------------------------ */
 /* Aquazone design tokens                                              */
 /* ------------------------------------------------------------------ */
-:root {
+:root,
+[data-theme="light"] {
   --navy: #0b2545;
   --navy-900: #071a33;
   --navy-700: #0a4a6b;
@@ -14,16 +15,42 @@
   --coral-600: #e8604a;
   --sun: #ffd166;
   --mint: #eefffc;
+
+  /* theme-aware surfaces and text (these change in dark mode) */
   --ink: #0b2545;
   --muted: #3e5670;
+  --surface: #ffffff;
+  --alt: #eefffc;
+  --card: #ffffff;
+  --line: rgba(11, 37, 69, 0.1);
+  --green-wash: #dff8ea;
+  --danger: #a82a20;
+  --shadow-card: 0 1px 2px rgba(11, 37, 69, 0.06), 0 12px 32px -8px rgba(11, 37, 69, 0.18);
+  --shadow-lift: 0 2px 4px rgba(11, 37, 69, 0.08), 0 28px 56px -12px rgba(0, 180, 198, 0.35);
+  color-scheme: light;
+}
 
+[data-theme="dark"] {
+  --ink: #e8f3ff;
+  --muted: #a3b9d1;
+  --surface: #08192e;
+  --alt: #0c2340;
+  --card: #102c4d;
+  --line: rgba(255, 255, 255, 0.12);
+  --green-wash: #0c2b2f;
+  --danger: #ff9d92;
+  --aqua-700: #6fd8e3; /* text accent on dark surfaces */
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.45), 0 14px 34px -10px rgba(0, 0, 0, 0.6);
+  --shadow-lift: 0 2px 4px rgba(0, 0, 0, 0.5), 0 28px 56px -12px rgba(0, 180, 198, 0.4);
+  color-scheme: dark;
+}
+
+:root {
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-io: cubic-bezier(0.65, 0, 0.35, 1);
 
   --grad-deep: linear-gradient(180deg, #0b2545 0%, #0a4a6b 45%, #00b4c6 100%);
   --grad-glow: radial-gradient(circle at 50% 0%, rgba(0, 180, 198, 0.35), transparent 60%);
-  --shadow-card: 0 1px 2px rgba(11, 37, 69, 0.06), 0 12px 32px -8px rgba(11, 37, 69, 0.18);
-  --shadow-lift: 0 2px 4px rgba(11, 37, 69, 0.08), 0 28px 56px -12px rgba(0, 180, 198, 0.35);
 }
 
 @theme inline {
@@ -38,10 +65,13 @@
   --color-sun: var(--sun);
   --color-mint: var(--mint);
   --color-muted: var(--muted);
+  --color-ink: var(--ink);
+  --color-surface: var(--surface);
+  --color-alt: var(--alt);
+  --color-card: var(--card);
   --font-sans: var(--font-inter), system-ui, sans-serif;
   --font-heading: var(--font-poppins), var(--font-inter), system-ui, sans-serif;
 }
-
 /* ------------------------------------------------------------------ */
 /* Base                                                                */
 /* ------------------------------------------------------------------ */
@@ -51,8 +81,9 @@ html {
 }
 
 body {
-  background: #ffffff;
+  background: var(--surface);
   color: var(--ink);
+  transition: background-color 0.35s ease, color 0.35s ease;
   font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 1.0625rem;
   line-height: 1.6;
@@ -64,7 +95,7 @@ h2,
 h3,
 h4 {
   font-family: var(--font-poppins), var(--font-inter), system-ui, sans-serif;
-  color: var(--navy);
+  color: var(--ink);
   line-height: 1.12;
   letter-spacing: -0.015em;
   font-weight: 700;
@@ -136,25 +167,104 @@ h4 {
 /* ------------------------------------------------------------------ */
 /* Components                                                          */
 /* ------------------------------------------------------------------ */
+/* Section label: a small glowing pill ("designed" eyebrow used above every heading) */
 .eyebrow {
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  font-size: 0.8125rem;
+  padding: 0.4rem 1rem 0.4rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--aqua-700);
+  background: color-mix(in srgb, var(--aqua) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--aqua) 34%, transparent);
 }
 .eyebrow::before {
   content: "";
-  width: 2rem;
-  height: 2px;
-  background: currentColor;
-  border-radius: 2px;
+  flex: none;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--aqua);
+  animation: eyebrow-ping 2.8s ease-out infinite;
 }
 .on-dark .eyebrow {
   color: var(--aqua-300);
+  background: rgba(111, 216, 227, 0.1);
+  border-color: rgba(111, 216, 227, 0.3);
+}
+.on-dark .eyebrow::before {
+  background: var(--aqua-300);
+}
+
+/* Highlighted words in headings (gradient text) */
+.hl {
+  background-image: linear-gradient(95deg, var(--hl-a), var(--hl-b));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  padding-bottom: 0.08em; /* keeps descenders from being clipped */
+}
+:root,
+[data-theme="light"] {
+  --hl-a: #008797;
+  --hl-b: #1f9a6c;
+}
+[data-theme="dark"] {
+  --hl-a: #6fd8e3;
+  --hl-b: #8ee6c4;
+}
+.on-dark .hl {
+  --hl-a: #6fd8e3;
+  --hl-b: #ffd166;
+}
+
+/* Wavy underline under every section heading (draws in as it scrolls into view) */
+.h2::after {
+  content: "";
+  display: block;
+  width: 6rem;
+  height: 7px;
+  margin-top: 1.1rem;
+  background: var(--sun);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 7'%3E%3Cpath d='M0 3.500 Q12 -1 24 3.500 T48 3.500 T72 3.500 T96 3.500' stroke='black' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 7'%3E%3Cpath d='M0 3.500 Q12 -1 24 3.500 T48 3.500 T72 3.500 T96 3.500' stroke='black' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  transform-origin: left center;
+}
+.text-center .h2::after,
+.h2.text-center::after {
+  margin-inline: auto;
+  transform-origin: center;
+}
+@supports (animation-timeline: view()) {
+  .h2::after {
+    animation: wave-in linear both;
+    animation-timeline: view();
+    animation-range: entry 15% entry 90%;
+  }
+}
+@keyframes wave-in {
+  from {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+  to {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+@keyframes eyebrow-ping {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--aqua) 60%, transparent);
+  }
+  70%,
+  100% {
+    box-shadow: 0 0 0 8px transparent;
+  }
 }
 
 /* Coral is reserved for primary conversion actions */
@@ -224,7 +334,7 @@ h4 {
   padding: 0.9rem 1.6rem;
   border-radius: 999px;
   border: 2px solid currentColor;
-  color: var(--navy);
+  color: var(--ink);
   background: transparent;
   transition:
     background-color 0.25s var(--ease-out),
@@ -234,8 +344,8 @@ h4 {
   cursor: pointer;
 }
 .btn-ghost:hover {
-  background: var(--navy);
-  color: #ffffff;
+  background: var(--ink);
+  color: var(--surface);
 }
 .on-dark .btn-ghost {
   color: #ffffff;
@@ -266,10 +376,11 @@ h4 {
 }
 
 .card {
-  background: #ffffff;
+  background: var(--card);
   border-radius: 1.5rem;
   box-shadow: var(--shadow-card);
-  border: 1px solid rgba(11, 37, 69, 0.06);
+  border: 1px solid var(--line);
+  transition: background-color 0.35s ease, border-color 0.35s ease;
 }
 
 .glass {
@@ -331,12 +442,12 @@ h4 {
 .field select,
 .field textarea {
   width: 100%;
-  background: var(--mint);
-  border: 1.5px solid rgba(11, 37, 69, 0.18);
+  background: var(--alt);
+  border: 1.5px solid color-mix(in srgb, var(--ink) 22%, transparent);
   border-radius: 0.9rem;
   padding: 1.5rem 1rem 0.6rem;
   font: inherit;
-  color: var(--navy);
+  color: var(--ink);
   transition:
     border-color 0.25s var(--ease-out),
     box-shadow 0.25s var(--ease-out),
@@ -371,17 +482,17 @@ h4 {
 .field textarea:focus {
   outline: none;
   border-color: var(--aqua);
-  background: #ffffff;
+  background: var(--surface);
   box-shadow: 0 0 0 4px rgba(0, 180, 198, 0.22);
 }
 .field[data-invalid="true"] input,
 .field[data-invalid="true"] select,
 .field[data-invalid="true"] textarea {
-  border-color: #c2362b;
+  border-color: var(--danger);
   animation: shake 0.4s var(--ease-io);
 }
 .field-error {
-  color: #a82a20;
+  color: var(--danger);
   font-size: 0.85rem;
   margin-top: 0.3rem;
   font-weight: 500;

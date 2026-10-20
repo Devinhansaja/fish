@@ -21,7 +21,7 @@ export default function GalleryPage() {
         text="Real photographs of our fish, tanks and people - from breeding facilities and fry grading to packing and community training."
         image="/images/bg/gallery.jpg"
       />
-      <section className="section bg-white !pt-10">
+      <section className="section bg-surface !pt-10">
         <div className="container-x">
           <GalleryGrid />
           <p className="mt-10 text-sm text-muted">

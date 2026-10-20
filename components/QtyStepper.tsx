@@ -22,7 +22,7 @@ export function QtyStepper({
   };
   const step = (d: number) => onChange(clampQty(value + d));
   const btn =
-    "grid h-8 w-8 shrink-0 place-items-center rounded-full border border-navy/20 text-base font-bold text-navy transition hover:border-aqua hover:bg-aqua/10";
+    "grid h-8 w-8 shrink-0 place-items-center rounded-full border border-ink/20 text-base font-bold text-ink transition hover:border-aqua hover:bg-aqua/10";
   return (
     <div className={`inline-flex items-center gap-1.5 ${className}`} role="group" aria-label={`Quantity for ${label}`}>
       <button type="button" className={btn} aria-label={`Decrease ${label}`} onClick={() => step(value > 10 ? -10 : -1)}>
@@ -43,7 +43,7 @@ export function QtyStepper({
             commit();
           }
         }}
-        className="h-8 w-16 rounded-lg border border-navy/20 bg-white text-center text-sm font-bold text-navy focus:border-aqua focus:outline-none focus:ring-2 focus:ring-aqua/30 [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none"
+        className="h-8 w-16 rounded-lg border border-ink/20 bg-surface text-center text-sm font-bold text-ink focus:border-aqua focus:outline-none focus:ring-2 focus:ring-aqua/30 [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none"
       />
       <button type="button" className={btn} aria-label={`Increase ${label}`} onClick={() => step(value >= 10 ? 10 : 1)}>
         +

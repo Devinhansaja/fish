@@ -81,8 +81,8 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
               <p key={i}>{para}</p>
             ))}
           </div>
-          <div className="mt-10 flex flex-wrap items-center gap-3 border-t border-navy/10 pt-6">
-            <span className="font-semibold text-navy">Share</span>
+          <div className="mt-10 flex flex-wrap items-center gap-3 border-t border-ink/10 pt-6">
+            <span className="font-semibold text-ink">Share</span>
             {share.map((s) => (
               <a
                 key={s.label}
@@ -90,7 +90,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`Share on ${s.label}`}
-                className="grid h-10 w-10 place-items-center rounded-full border-2 border-navy/20 text-navy transition hover:-translate-y-1 hover:border-aqua hover:text-aqua-700"
+                className="grid h-10 w-10 place-items-center rounded-full border-2 border-ink/20 text-ink transition hover:-translate-y-1 hover:border-aqua hover:text-aqua-700"
               >
                 <Icon name={s.icon} size={18} />
               </a>
@@ -99,7 +99,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         </article>
       </ReadingProgress>
 
-      <section className="section bg-mint !py-16">
+      <section className="section bg-alt !py-16">
         <div className="container-x">
           <h2 className="h3 mb-8">Related articles</h2>
           <div className="grid gap-6 md:grid-cols-3">
@@ -109,7 +109,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           </div>
         </div>
       </section>
-      <FinalCTA fill="#eefffc" />
+      <FinalCTA fill="var(--alt)" />
     </>
   );
 }

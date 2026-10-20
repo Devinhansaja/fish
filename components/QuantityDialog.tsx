@@ -85,7 +85,7 @@ export function QuantityDialog({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 24, scale: 0.95 }}
             transition={{ duration: 0.35, ease: ease.out }}
-            className="w-full max-w-sm rounded-3xl bg-white p-6 text-navy shadow-2xl"
+            className="w-full max-w-sm rounded-3xl bg-surface p-6 text-ink shadow-2xl"
           >
             <div className="flex items-start justify-between gap-4">
               <div>
@@ -94,7 +94,7 @@ export function QuantityDialog({
                 </p>
                 {subtitle && <p className="text-sm italic text-muted">{subtitle}</p>}
               </div>
-              <button type="button" onClick={onClose} aria-label="Close" className="grid h-9 w-9 shrink-0 place-items-center rounded-full hover:bg-navy/10">
+              <button type="button" onClick={onClose} aria-label="Close" className="grid h-9 w-9 shrink-0 place-items-center rounded-full hover:bg-ink/10">
                 <Icon name="close" size={18} strokeWidth={2.4} />
               </button>
             </div>
@@ -103,7 +103,7 @@ export function QuantityDialog({
               Quantity (pieces)
             </label>
             <div className="mt-2 flex items-stretch gap-2">
-              <button type="button" onClick={() => bump(-10)} aria-label="Decrease by 10" className="grid h-12 w-12 place-items-center rounded-2xl border-2 border-navy/15 text-lg font-bold hover:border-aqua">
+              <button type="button" onClick={() => bump(-10)} aria-label="Decrease by 10" className="grid h-12 w-12 place-items-center rounded-2xl border-2 border-ink/15 text-lg font-bold hover:border-aqua">
                 &minus;
               </button>
               <input
@@ -116,9 +116,9 @@ export function QuantityDialog({
                 step={1}
                 value={qty}
                 onChange={(e) => setQty(e.target.value)}
-                className="h-12 min-w-0 flex-1 rounded-2xl border-2 border-navy/15 bg-mint text-center text-xl font-bold focus:border-aqua focus:outline-none focus:ring-4 focus:ring-aqua/20"
+                className="h-12 min-w-0 flex-1 rounded-2xl border-2 border-ink/15 bg-alt text-center text-xl font-bold focus:border-aqua focus:outline-none focus:ring-4 focus:ring-aqua/20"
               />
-              <button type="button" onClick={() => bump(10)} aria-label="Increase by 10" className="grid h-12 w-12 place-items-center rounded-2xl border-2 border-navy/15 text-lg font-bold hover:border-aqua">
+              <button type="button" onClick={() => bump(10)} aria-label="Increase by 10" className="grid h-12 w-12 place-items-center rounded-2xl border-2 border-ink/15 text-lg font-bold hover:border-aqua">
                 +
               </button>
             </div>
@@ -130,7 +130,7 @@ export function QuantityDialog({
                   type="button"
                   onClick={() => setQty(String(p))}
                   aria-pressed={n === p}
-                  className={`rounded-full border-2 px-3.5 py-1 text-sm font-semibold transition ${n === p ? "border-aqua bg-aqua/15" : "border-navy/15 hover:border-aqua"}`}
+                  className={`rounded-full border-2 px-3.5 py-1 text-sm font-semibold transition ${n === p ? "border-aqua bg-aqua/15" : "border-ink/15 hover:border-aqua"}`}
                 >
                   {p.toLocaleString("en-US")}
                 </button>

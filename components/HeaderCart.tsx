@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
@@ -92,7 +92,7 @@ export function HeaderCart() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -10, scale: 0.96 }}
             transition={{ duration: 0.3, ease: ease.out }}
-            className="absolute right-0 top-full z-50 mt-3 w-[min(92vw,22rem)] origin-top-right rounded-3xl bg-white p-5 text-navy shadow-2xl ring-1 ring-navy/10"
+            className="absolute right-0 top-full z-50 mt-3 w-[min(92vw,22rem)] origin-top-right rounded-3xl bg-surface p-5 text-ink shadow-2xl ring-1 ring-ink/10"
           >
             <div className="flex items-center justify-between">
               <p className="text-lg font-bold" style={{ fontFamily: "var(--font-poppins)" }}>
@@ -122,7 +122,7 @@ export function HeaderCart() {
                       initial={{ opacity: 0, x: 20 }}
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: -20, height: 0 }}
-                      className="rounded-2xl bg-mint px-4 py-3"
+                      className="rounded-2xl bg-alt px-4 py-3"
                     >
                       <div className="flex items-start justify-between gap-3">
                         <span className="min-w-0">
@@ -133,7 +133,7 @@ export function HeaderCart() {
                           type="button"
                           onClick={() => remove(s.slug)}
                           aria-label={`Remove ${s.commonName}`}
-                          className="-mr-1 -mt-1 grid h-8 w-8 shrink-0 place-items-center rounded-full text-navy/70 hover:bg-navy/10"
+                          className="-mr-1 -mt-1 grid h-8 w-8 shrink-0 place-items-center rounded-full text-ink/70 hover:bg-ink/10"
                         >
                           <Icon name="close" size={16} strokeWidth={2.4} />
                         </button>

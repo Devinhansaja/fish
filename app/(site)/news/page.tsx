@@ -21,7 +21,7 @@ export default function NewsPage() {
         text="Fish care, grading, export know-how and sustainable aquaculture."
         image="/images/bg/news.jpg"
       />
-      <section className="section bg-white !pt-10">
+      <section className="section bg-surface !pt-10">
         <div className="container-x">
           <NewsList />
           <p className="mt-10 text-sm text-muted">

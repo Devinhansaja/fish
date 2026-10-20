@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 
 /** Logo placeholder - replace with the official Aquazone logo asset when supplied. TODO */
 export function LogoMark({ size = 40, className }: { size?: number; className?: string }) {
@@ -31,7 +31,7 @@ export function Logo({ light = true, className = "" }: { light?: boolean; classN
       <LogoMark className="h-8 w-8 sm:h-10 sm:w-10" />
       <span className="leading-none">
         <span
-          className={`block font-heading text-base font-extrabold sm:text-xl tracking-wide ${light ? "text-white" : "text-navy"}`}
+          className={`block font-heading text-base font-extrabold sm:text-xl tracking-wide ${light ? "text-white" : "text-ink"}`}
           style={{ fontFamily: "var(--font-poppins)" }}
         >
           AQUAZONE

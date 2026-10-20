@@ -7,8 +7,9 @@ import { GhostButton, PrimaryCTA, WaveDivider } from "./ui";
 import { Reveal, Stagger, StaggerItem, WaterReveal } from "./Reveal";
 import { Icon, type IconName } from "./Icon";
 import { site } from "@/lib/site";
+import { Hl } from "@/components/Hl";
 
-export function FinalCTA({ fill = "#ffffff" }: { fill?: string }) {
+export function FinalCTA({ fill = "var(--surface)" }: { fill?: string }) {
   return (
     <section className="on-dark relative overflow-hidden bg-deep" aria-labelledby="final-cta">
       <div className="absolute inset-x-0 top-0 rotate-180">
@@ -19,7 +20,7 @@ export function FinalCTA({ fill = "#ffffff" }: { fill?: string }) {
       <div className="container-x relative py-28 text-center sm:py-36">
         <Reveal>
           <h2 id="final-cta" className="h2 mx-auto max-w-3xl text-white">
-            Ready to Source Premium Tropical Fish from Sri Lanka?
+            <Hl>Ready to Source Premium Tropical Fish from Sri Lanka?</Hl>
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-lg text-white/90">
             Connect with Aquazone and explore ornamental fish supply opportunities for your business.
@@ -58,13 +59,13 @@ const pillars: { icon: IconName; label: string }[] = [
 
 export function SustainabilityPreview() {
   return (
-    <section className="section overflow-hidden" style={{ background: "linear-gradient(180deg,#ffffff 0%,#eefffc 40%,#dff8ea 100%)" }} aria-labelledby="sust-title">
+    <section className="section overflow-hidden" style={{ background: "linear-gradient(180deg,var(--surface) 0%,var(--alt) 40%,var(--green-wash) 100%)" }} aria-labelledby="sust-title">
       <div className="container-x grid items-center gap-14 lg:grid-cols-2">
         <div>
           <Reveal>
             <p className="eyebrow mb-4">Sustainability &amp; Community</p>
             <h2 id="sust-title" className="h2">
-              Growing Together. Protecting Tomorrow.
+              <Hl>Growing Together. Protecting Tomorrow.</Hl>
             </h2>
             <p className="mt-6 text-lg text-muted">
               Aquazone is built on a rural outgrower network. Local families, including woman-headed enterprises,
@@ -75,14 +76,14 @@ export function SustainabilityPreview() {
           <Stagger className="mt-8 grid gap-3 sm:grid-cols-2" gap={0.07}>
             {pillars.map((p, i) => (
               <StaggerItem key={p.label}>
-                <div className="flex items-center gap-3 rounded-2xl bg-white/80 p-3 shadow-sm ring-1 ring-navy/5 backdrop-blur">
+                <div className="flex items-center gap-3 rounded-2xl bg-surface/80 p-3 shadow-sm ring-1 ring-ink/5 backdrop-blur">
                   <span
                     className="grid h-10 w-10 shrink-0 place-items-center rounded-xl text-white"
                     style={{ background: i % 2 ? "#00b4c6" : "#2aa876", animation: `float-y ${4 + (i % 3)}s ease-in-out ${i * 0.3}s infinite` }}
                   >
                     <Icon name={p.icon} size={20} />
                   </span>
-                  <span className="font-semibold text-navy">{p.label}</span>
+                  <span className="font-semibold text-ink">{p.label}</span>
                 </div>
               </StaggerItem>
             ))}
@@ -120,8 +121,8 @@ export function SustainabilityPreview() {
             </WaterReveal>
           </div>
           <motion.div
-            className="glass absolute -bottom-6 left-4 hidden px-5 py-4 text-sm font-semibold text-navy sm:block"
-            style={{ background: "rgba(255,255,255,.85)" }}
+            className="glass absolute -bottom-6 left-4 hidden px-5 py-4 text-sm font-semibold text-ink sm:block"
+            style={{ background: "color-mix(in srgb, var(--card) 88%, transparent)" }}
             animate={{ y: [0, -8, 0] }}
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
           >

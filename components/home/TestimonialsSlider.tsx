@@ -22,9 +22,9 @@ export function TestimonialsSlider() {
             <svg viewBox="0 0 48 36" className="mx-auto mb-6 h-9 text-aqua" fill="currentColor" aria-hidden="true">
               <path d="M0 36V20C0 8 7 1 19 0v7c-6 1-9 5-9 10h9v19H0Zm28 0V20C28 8 35 1 47 0v7c-6 1-9 5-9 10h9v19H28Z" />
             </svg>
-            <blockquote className="text-xl font-medium leading-relaxed text-navy sm:text-2xl">{t.quote}</blockquote>
+            <blockquote className="text-xl font-medium leading-relaxed text-ink sm:text-2xl">{t.quote}</blockquote>
             <figcaption className="mt-6">
-              <span className="font-bold text-navy">{t.author}</span>
+              <span className="font-bold text-ink">{t.author}</span>
               <span className="mx-2 text-muted">-</span>
               <span className="text-muted">{t.role}</span>
               {t.draft && <span className="draft-badge ml-3">Draft placeholder</span>}
@@ -40,7 +40,7 @@ export function TestimonialsSlider() {
             aria-label={`Show testimonial ${idx + 1}`}
             aria-current={idx === i}
             onClick={() => setI(idx)}
-            className="h-2.5 rounded-full bg-navy/25 transition-all duration-500"
+            className="h-2.5 rounded-full bg-ink/25 transition-all duration-500"
             style={{ width: idx === i ? 32 : 10, background: idx === i ? "var(--aqua)" : undefined }}
           />
         ))}

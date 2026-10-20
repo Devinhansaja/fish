@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -77,7 +77,7 @@ export function FishCard({ s, sizes = "(min-width:1024px) 25vw, (min-width:640px
       <div className="flex flex-1 flex-col p-5">
         <p className="text-xs font-bold uppercase tracking-[0.14em] text-aqua-700">{categoryLabel(s.category)}</p>
         <h3 className="mt-1 text-xl font-bold">
-          <Link href={`/fish-collection/${s.slug}`} className="text-navy no-underline after:absolute after:inset-0 after:content-['']" style={{ fontFamily: "var(--font-poppins)" }}>
+          <Link href={`/fish-collection/${s.slug}`} className="text-ink no-underline after:absolute after:inset-0 after:content-['']" style={{ fontFamily: "var(--font-poppins)" }}>
             {s.commonName}
           </Link>
         </h3>
@@ -97,7 +97,7 @@ export function FishCard({ s, sizes = "(min-width:1024px) 25vw, (min-width:640px
             onClick={() => setDialog(true)}
             aria-pressed={inList}
             aria-haspopup="dialog"
-            className={`inline-flex items-center gap-1.5 rounded-full border-2 px-3.5 py-1.5 text-sm font-semibold transition ${inList ? "border-aqua bg-aqua/15 text-aqua-700" : "border-navy/20 text-navy hover:border-aqua"}`}
+            className={`inline-flex items-center gap-1.5 rounded-full border-2 px-3.5 py-1.5 text-sm font-semibold transition ${inList ? "border-aqua bg-aqua/15 text-aqua-700" : "border-ink/20 text-ink hover:border-aqua"}`}
           >
             <Icon name={inList ? "check" : "plus"} size={15} strokeWidth={2.4} />
             {inList ? `In quote · ${qty.toLocaleString("en-US")} pcs` : "Add to quote"}

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -9,8 +9,29 @@ import { Logo } from "./Logo";
 import { PrimaryCTA } from "./ui";
 import { Icon } from "./Icon";
 import { HeaderCart } from "./HeaderCart";
+import { ThemeToggle, useTheme } from "./ThemeToggle";
 import { SHOW_HEADER_EVENT } from "@/lib/flyFish";
 import { ease } from "@/lib/motion";
+
+/** Light/dark switch row inside the phone menu (the header button is hidden on small screens). */
+function MobileThemeRow() {
+  const { theme, toggle } = useTheme();
+  const dark = theme === "dark";
+  return (
+    <button
+      type="button"
+      onClick={toggle}
+      aria-pressed={dark}
+      className="flex w-full items-center justify-between rounded-full border border-white/25 px-5 py-3 text-lg font-semibold text-white"
+    >
+      <span className="flex items-center gap-3">
+        <Icon name={dark ? "moon" : "sun"} size={22} />
+        {dark ? "Dark mode" : "Light mode"}
+      </span>
+      <span className="text-sm text-white/70">Tap to switch</span>
+    </button>
+  );
+}
 
 /** Desktop "Products" dropdown (CSS only: opens on hover and on keyboard focus). */
 function ProductsMenu({ isActive }: { isActive: (href: string) => boolean }) {
@@ -25,12 +46,12 @@ function ProductsMenu({ isActive }: { isActive: (href: string) => boolean }) {
         {active && <span className="absolute -bottom-1 left-1/2 h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-sun" />}
       </Link>
       <div className="invisible absolute left-1/2 top-full z-50 w-64 -translate-x-1/2 translate-y-2 pt-3 opacity-0 transition-all duration-300 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
-        <ul className="overflow-hidden rounded-2xl bg-white p-2 text-navy shadow-2xl ring-1 ring-navy/10">
+        <ul className="overflow-hidden rounded-2xl bg-surface p-2 text-ink shadow-2xl ring-1 ring-ink/10">
           {productNav.map((p) => (
             <li key={p.href}>
               <Link
                 href={p.href}
-                className={`flex items-center justify-between gap-3 rounded-xl px-4 py-3 text-[0.95rem] font-semibold text-navy no-underline transition hover:bg-mint ${isActive(p.href) ? "bg-mint" : ""}`}
+                className={`flex items-center justify-between gap-3 rounded-xl px-4 py-3 text-[0.95rem] font-semibold text-ink no-underline transition hover:bg-alt ${isActive(p.href) ? "bg-alt" : ""}`}
               >
                 {p.label}
                 {p.soon && <span className="rounded-full bg-sun px-2 py-0.5 text-[0.65rem] font-extrabold uppercase tracking-wider">Soon</span>}
@@ -144,6 +165,7 @@ export function Header() {
               >
                 EN
               </span>
+              <ThemeToggle className="hidden sm:grid" />
               <HeaderCart />
               <PrimaryCTA small pulse arrow={false} className="whitespace-nowrap">
                 <span className="hidden sm:inline">Request a Quote</span>
@@ -222,11 +244,12 @@ export function Header() {
                 </motion.div>
               ))}
               <motion.div
-                className="mt-8"
+                className="mt-8 space-y-4"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.25 + nav.length * 0.06 }}
               >
+                <MobileThemeRow />
                 <PrimaryCTA className="w-full" />
               </motion.div>
             </nav>

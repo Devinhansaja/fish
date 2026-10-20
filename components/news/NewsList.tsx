@@ -20,7 +20,7 @@ export function BlogCard({ p, large }: { p: Post; large?: boolean }) {
           {p.draft && <span className="draft-badge">Draft</span>}
         </div>
         <h3 className={`mt-3 ${large ? "text-2xl sm:text-3xl" : "text-xl"}`}>
-          <Link href={`/news/${p.slug}`} className="text-navy no-underline after:absolute after:inset-0 after:content-['']" style={{ fontFamily: "var(--font-poppins)" }}>
+          <Link href={`/news/${p.slug}`} className="text-ink no-underline after:absolute after:inset-0 after:content-['']" style={{ fontFamily: "var(--font-poppins)" }}>
             {p.title}
           </Link>
         </h3>
@@ -52,7 +52,7 @@ export function NewsList() {
               type="button"
               aria-pressed={cat === c}
               onClick={() => setCat(c)}
-              className={`relative rounded-full border-2 px-4 py-2 text-sm font-semibold transition-colors ${cat === c ? "border-aqua text-navy" : "border-navy/15 text-muted hover:border-aqua/60"}`}
+              className={`relative rounded-full border-2 px-4 py-2 text-sm font-semibold transition-colors ${cat === c ? "border-aqua text-ink" : "border-ink/15 text-muted hover:border-aqua/60"}`}
             >
               {cat === c && <motion.span layoutId="news-pill" className="absolute inset-0 rounded-full bg-aqua/20" transition={{ type: "spring", stiffness: 380, damping: 32 }} />}
               <span className="relative">{c}</span>

@@ -6,6 +6,7 @@ import { FinalCTA } from "@/components/Sections";
 import { Icon, type IconName } from "@/components/Icon";
 import { BubbleField } from "@/components/Underwater";
 import { JsonLd, breadcrumbLd } from "@/components/JsonLd";
+import { Hl } from "@/components/Hl";
 
 export const metadata: Metadata = {
   title: "Sustainability - Responsible Aquaculture & Community Partnerships",
@@ -37,7 +38,7 @@ export default function SustainabilityPage() {
         image="/images/bg/sustainability.jpg"
       />
 
-      <section className="section overflow-hidden !pt-10" style={{ background: "linear-gradient(180deg,#ffffff,#eefffc 60%,#dff8ea)" }}>
+      <section className="section overflow-hidden !pt-10" style={{ background: "linear-gradient(180deg,var(--surface),var(--alt) 60%,var(--green-wash))" }}>
         <div className="container-x">
           <SectionHeading eyebrow="Our commitments" title="Nine Ways We Look After Fish, Water and People" align="center" />
           <Stagger className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3" gap={0.08}>
@@ -65,7 +66,7 @@ export default function SustainabilityPage() {
         <div className="container-x relative grid items-center gap-12 lg:grid-cols-2">
           <Reveal dir="left">
             <p className="eyebrow mb-4">Water stewardship</p>
-            <h2 className="h2">Water Is Our Most Valuable Resource</h2>
+            <h2 className="h2"><Hl>Water Is Our Most Valuable Resource</Hl></h2>
             <p className="mt-6 text-lg text-white/85">
               Aquaculture depends on clean, well-managed water. We prioritise responsible water management and efficient use
               so that the farm and the surrounding ecosystem stay healthy.
@@ -76,7 +77,7 @@ export default function SustainabilityPage() {
             </p>
           </Reveal>
           <Reveal dir="right">
-            <svg viewBox="0 0 320 240" className="mx-auto w-full max-w-md" role="img" aria-label="Illustration of a continuous water cycle between tank, filtration and return flow">
+            <svg viewBox="0 -16 320 280" className="mx-auto w-full max-w-md overflow-visible" role="img" aria-label="Illustration of a continuous water cycle between tank, filtration and return flow">
               <circle cx="160" cy="120" r="84" fill="none" stroke="rgba(111,216,227,.35)" strokeWidth="3" strokeDasharray="2 10" strokeLinecap="round" style={{ animation: "dash-flow 1.6s linear infinite" }} />
               {[
                 { x: 160, y: 36, l: "Clean water", c: "#00b4c6" },
@@ -97,11 +98,11 @@ export default function SustainabilityPage() {
         </div>
       </section>
 
-      <section className="section bg-white">
+      <section className="section bg-surface">
         <div className="container-x grid items-center gap-14 lg:grid-cols-2">
           <Reveal dir="left">
             <p className="eyebrow mb-4">Community &amp; livelihoods</p>
-            <h2 className="h2">Woman-Headed Enterprises at the Heart of Our Supply Chain</h2>
+            <h2 className="h2"><Hl>Woman-Headed Enterprises at the Heart of Our Supply Chain</Hl></h2>
             <p className="mt-6 text-lg text-muted">
               We provide local women with specialised technical training, high-quality breeding stock and a guaranteed
               buy-back market - helping home-based aquarium setups grow into sustainable, higher-income micro-businesses.

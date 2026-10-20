@@ -16,7 +16,7 @@ export const site = {
   description:
     "Aquazone Ornamental Fish Farm (Pvt) Ltd is a Sri Lankan exporter of high-quality live ornamental freshwater fish for wholesalers, distributors, retailers and public aquariums worldwide.",
   address: {
-    line1: "Nelawa, Kohilagethera",
+    line1: "222/1, Nelawa, Kohilegedara",
     country: "Sri Lanka",
   },
   /** TODO: confirm with Aquazone */

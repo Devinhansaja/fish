@@ -5,6 +5,7 @@ import { FinalCTA } from "./Sections";
 import { NotifyForm } from "./NotifyForm";
 import { BubbleField } from "./Underwater";
 import { Icon, type IconName } from "./Icon";
+import { Hl } from "@/components/Hl";
 
 type Kind = "plants" | "accessories";
 
@@ -123,7 +124,7 @@ export function ComingSoon({ kind }: { kind: Kind }) {
         <div className="container-x relative grid items-center gap-12 py-20 sm:py-24 lg:grid-cols-[1.1fr_0.9fr]">
           <Reveal dir="left">
             <p className="eyebrow mb-4">Be the first to know</p>
-            <h2 className="h2">Launching in the coming months</h2>
+            <h2 className="h2"><Hl>Launching in the coming months</Hl></h2>
             <p className="mt-5 max-w-xl text-lg text-white/85">
               Leave your email and we will tell you the moment {kind === "plants" ? "aquarium plants are" : "aquarium accessories are"} available to order.
             </p>
@@ -140,7 +141,7 @@ export function ComingSoon({ kind }: { kind: Kind }) {
       </section>
 
       {/* planned range */}
-      <section className="section bg-mint">
+      <section className="section bg-alt">
         <div className="container-x">
           <SectionHeading eyebrow="What is coming" title={c.plannedTitle} align="center" />
           <p className="mx-auto mt-4 max-w-2xl text-center text-sm text-muted">
@@ -167,7 +168,7 @@ export function ComingSoon({ kind }: { kind: Kind }) {
       </section>
 
       {/* meanwhile */}
-      <section className="section bg-white">
+      <section className="section bg-surface">
         <div className="container-x">
           <SectionHeading eyebrow="In the meantime" title="Aquazone fish are available to quote today" align="center" text="Koi, goldfish, tropical freshwater fish and selected Sri Lankan native species." />
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">

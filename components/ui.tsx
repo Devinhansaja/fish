@@ -6,6 +6,7 @@ import { useRef, type MouseEvent, type ReactNode } from "react";
 import { Icon } from "./Icon";
 import { QUOTE_HREF } from "@/lib/site";
 import { Reveal } from "./Reveal";
+import { Hl } from "./Hl";
 import { useMotionPrefs } from "./MotionProvider";
 
 /** Primary conversion button. Coral is reserved for this component only. */
@@ -137,21 +138,10 @@ export function SectionHeading({
   return (
     <div className={`${align === "center" ? "mx-auto text-center" : ""} max-w-3xl ${dark ? "on-dark" : ""}`}>
       <Reveal>
-        {eyebrow && <p className="eyebrow mb-4">{eyebrow}</p>}
-        <Tag className="h2">{title}</Tag>
-        <span
-          aria-hidden="true"
-          className={`mt-5 block h-[6px] w-24 rounded-full ${align === "center" ? "mx-auto" : ""}`}
-          style={{
-            background: "var(--sun)",
-            maskImage:
-              "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 6'%3E%3Cpath d='M0 3 Q12 -1 24 3 T48 3 T72 3 T96 3' stroke='black' stroke-width='3' fill='none'/%3E%3C/svg%3E\")",
-            WebkitMaskImage:
-              "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 6'%3E%3Cpath d='M0 3 Q12 -1 24 3 T48 3 T72 3 T96 3' stroke='black' stroke-width='3' fill='none'/%3E%3C/svg%3E\")",
-            maskSize: "100% 100%",
-            WebkitMaskSize: "100% 100%",
-          }}
-        />
+        {eyebrow && <p className="eyebrow mb-5">{eyebrow}</p>}
+        <Tag className="h2">
+          <Hl>{title}</Hl>
+        </Tag>
         {text && <p className={`mt-6 text-lg ${dark ? "text-white/85" : "text-muted"}`}>{text}</p>}
       </Reveal>
     </div>
@@ -179,7 +169,7 @@ function WaveLayer({ speed, opacity, offset, fill }: { speed: string; opacity: n
 
 /** Two-layer animated SVG wave. `fill` is the colour of the NEXT section. */
 export function WaveDivider({
-  fill = "var(--mint)",
+  fill = "var(--alt)",
   flip,
   className = "",
 }: {
@@ -247,7 +237,7 @@ export function PageHero({
         </Reveal>
       </div>
       <div className="absolute inset-x-0 bottom-[-1px]">
-        <WaveDivider fill="#ffffff" />
+        <WaveDivider fill="var(--surface)" />
       </div>
     </section>
   );

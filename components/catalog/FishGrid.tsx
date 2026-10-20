@@ -87,7 +87,7 @@ export function FishGrid() {
             onBlur={() => setSearchOpen(false)}
             placeholder="Search fish..."
             aria-label="Search fish by name"
-            className="w-full rounded-full border-2 border-navy/15 bg-white py-3 pl-12 pr-4 text-navy shadow-sm transition focus:border-aqua focus:outline-none focus:ring-4 focus:ring-aqua/20"
+            className="w-full rounded-full border-2 border-ink/15 bg-surface py-3 pl-12 pr-4 text-ink shadow-sm transition focus:border-aqua focus:outline-none focus:ring-4 focus:ring-aqua/20"
           />
         </motion.div>
 
@@ -111,7 +111,7 @@ export function FishGrid() {
             <select
               value={f.value}
               onChange={(e) => f.set(e.target.value)}
-              className="appearance-none rounded-full border-2 border-navy/15 bg-white py-3 pl-5 pr-10 font-medium text-navy shadow-sm transition focus:border-aqua focus:outline-none focus:ring-4 focus:ring-aqua/20"
+              className="appearance-none rounded-full border-2 border-ink/15 bg-surface py-3 pl-5 pr-10 font-medium text-ink shadow-sm transition focus:border-aqua focus:outline-none focus:ring-4 focus:ring-aqua/20"
             >
               {f.opts.map(([v, l]) => (
                 <option key={v} value={v}>
@@ -119,7 +119,7 @@ export function FishGrid() {
                 </option>
               ))}
             </select>
-            <svg viewBox="0 0 12 8" className="pointer-events-none absolute right-4 top-1/2 h-2 w-3 -translate-y-1/2 text-navy" aria-hidden="true">
+            <svg viewBox="0 0 12 8" className="pointer-events-none absolute right-4 top-1/2 h-2 w-3 -translate-y-1/2 text-ink" aria-hidden="true">
               <path d="m1 1 5 5 5-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
             </svg>
           </label>
@@ -145,7 +145,7 @@ export function FishGrid() {
                 setGroup(g);
                 setCat("all");
               }}
-              className={`relative rounded-full px-5 py-2.5 text-sm font-bold transition-colors ${group === g ? "text-white" : "text-navy hover:text-aqua-700"}`}
+              className={`relative rounded-full px-5 py-2.5 text-sm font-bold transition-colors ${group === g ? "text-white" : "text-ink hover:text-aqua-700"}`}
             >
               {group === g && (
                 <motion.span layoutId="group-pill" className="absolute inset-0 -z-0 rounded-full bg-navy" transition={{ type: "spring", stiffness: 380, damping: 32 }} />
@@ -165,7 +165,7 @@ export function FishGrid() {
               type="button"
               aria-pressed={cat === c.id}
               onClick={() => setCat(c.id)}
-              className={`relative rounded-full border-2 px-4 py-1.5 text-sm font-semibold transition-colors ${cat === c.id ? "border-aqua text-navy" : "border-navy/15 text-muted hover:border-aqua/60"}`}
+              className={`relative rounded-full border-2 px-4 py-1.5 text-sm font-semibold transition-colors ${cat === c.id ? "border-aqua text-ink" : "border-ink/15 text-muted hover:border-aqua/60"}`}
             >
               {cat === c.id && (
                 <motion.span layoutId="chip-pill" className="absolute inset-0 rounded-full bg-aqua/20" transition={{ type: "spring", stiffness: 380, damping: 32 }} />
@@ -199,7 +199,7 @@ export function FishGrid() {
       </motion.div>
 
       {results.length === 0 && (
-        <div className="mx-auto mt-10 max-w-md rounded-3xl bg-mint p-10 text-center">
+        <div className="mx-auto mt-10 max-w-md rounded-3xl bg-alt p-10 text-center">
           <div className="mx-auto w-32" style={{ animation: "swim-bob 5s ease-in-out infinite", ["--amp" as string]: "10px" }}>
             <FishIllustration color="#00b4c6" fin="#6fd8e3" className="h-auto w-full" />
           </div>

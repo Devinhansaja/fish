@@ -7,6 +7,7 @@ import { FinalCTA } from "@/components/Sections";
 import { Icon, type IconName } from "@/components/Icon";
 import { JsonLd, breadcrumbLd } from "@/components/JsonLd";
 import { CertCard } from "@/components/CertCard";
+import { Hl } from "@/components/Hl";
 
 export const metadata: Metadata = {
   title: "Quality Assurance - Quarantine, Biosecurity & Export Compliance",
@@ -39,7 +40,7 @@ export default function QualityPage() {
         <PrimaryCTA>Request Export Information</PrimaryCTA>
       </PageHero>
 
-      <section className="section bg-white !pt-10">
+      <section className="section bg-surface !pt-10">
         <div className="container-x">
           <SectionHeading eyebrow="Our quality system" title="Eight Pillars of Healthy Exports" align="center" />
           <Stagger className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4" gap={0.07}>
@@ -58,12 +59,12 @@ export default function QualityPage() {
         </div>
       </section>
 
-      <section className="section bg-mint">
+      <section className="section bg-alt">
         <div className="container-x grid items-center gap-14 lg:grid-cols-2">
           <div>
             <Reveal>
               <p className="eyebrow mb-4">Health-check routine</p>
-              <h2 className="h2">Checked Before It&apos;s Packed</h2>
+              <h2 className="h2"><Hl>Checked Before It&apos;s Packed</Hl></h2>
             </Reveal>
             <div className="mt-8">
               <QualityChecklist
@@ -88,7 +89,7 @@ export default function QualityPage() {
         </div>
       </section>
 
-      <section className="section bg-white">
+      <section className="section bg-surface">
         <div className="container-x">
           <SectionHeading eyebrow="Monitoring" title="Stable Water, Healthy Fish" align="center" text="Temperature, pH and dissolved oxygen are the numbers every aquaculture team watches." />
           <div className="mt-12">
@@ -97,7 +98,7 @@ export default function QualityPage() {
         </div>
       </section>
 
-      <section className="section bg-mint">
+      <section className="section bg-alt">
         <div className="container-x">
           <SectionHeading eyebrow="Licences & certifications" title="Verified Credentials" align="center" text="Official certificates will appear here once supplied. Hover or focus a card to flip it." />
           <div className="mt-12 grid gap-6 md:grid-cols-3">
@@ -112,7 +113,7 @@ export default function QualityPage() {
         </div>
       </section>
 
-      <FinalCTA fill="#eefffc" />
+      <FinalCTA fill="var(--alt)" />
     </>
   );
 }

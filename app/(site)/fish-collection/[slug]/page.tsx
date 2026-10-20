@@ -77,7 +77,7 @@ export default async function SpeciesPage({ params }: { params: Promise<{ slug: 
         </div>
       </section>
 
-      <section className="section bg-white !pt-12">
+      <section className="section bg-surface !pt-12">
         <div className="container-x grid gap-12 lg:grid-cols-[1.15fr_0.85fr]">
           <div className="space-y-12">
             <SpeciesGallery s={s} />
@@ -93,7 +93,7 @@ export default async function SpeciesPage({ params }: { params: Promise<{ slug: 
         </div>
       </section>
 
-      <section className="section bg-mint !py-16">
+      <section className="section bg-alt !py-16">
         <div className="container-x">
           <h2 className="h3 mb-8">You may also like</h2>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -103,7 +103,7 @@ export default async function SpeciesPage({ params }: { params: Promise<{ slug: 
           </div>
         </div>
       </section>
-      <FinalCTA fill="#eefffc" />
+      <FinalCTA fill="var(--alt)" />
     </>
   );
 }

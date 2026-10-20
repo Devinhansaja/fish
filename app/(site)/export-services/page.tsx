@@ -7,6 +7,7 @@ import { FinalCTA } from "@/components/Sections";
 import { Icon } from "@/components/Icon";
 import { services, buyerJourney } from "@/lib/content";
 import { JsonLd, breadcrumbLd } from "@/components/JsonLd";
+import { Hl } from "@/components/Hl";
 
 export const metadata: Metadata = {
   title: "Export & Services - Live Ornamental Fish Packing, Air Freight & Documentation",
@@ -29,7 +30,7 @@ export default function ExportServicesPage() {
         <GhostButton href="/quality-assurance">Quality Assurance</GhostButton>
       </PageHero>
 
-      <section className="section bg-white !pt-10">
+      <section className="section bg-surface !pt-10">
         <div className="container-x">
           <SectionHeading eyebrow="What we offer" title="End-to-End Support for International Buyers" align="center" />
           <Stagger className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4" gap={0.08}>
@@ -57,14 +58,14 @@ export default function ExportServicesPage() {
         </div>
       </section>
 
-      <section className="section bg-mint">
+      <section className="section bg-alt">
         <div className="container-x grid items-center gap-14 lg:grid-cols-2">
           <WaterReveal className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-xl">
             <Image src="/images/oxygen-packing.jpg" alt="Clear packing bags floating in a tank, ready for live-fish packing" fill sizes="(min-width:1024px) 40vw, 90vw" className="object-cover" />
           </WaterReveal>
           <Reveal dir="right">
             <p className="eyebrow mb-4">Professional live-fish packaging</p>
-            <h2 className="h2">Packed for Arrival, Not Just Departure</h2>
+            <h2 className="h2"><Hl>Packed for Arrival, Not Just Departure</Hl></h2>
             <p className="mt-6 text-lg text-muted">
               Fish are conditioned, graded and packed in appropriately sized bags with calibrated oxygen, then protected in
               outer packaging for transit. Packing is adapted to species, size and journey time.
@@ -77,7 +78,7 @@ export default function ExportServicesPage() {
         </div>
       </section>
 
-      <section className="section bg-white">
+      <section className="section bg-surface">
         <div className="container-x">
           <SectionHeading eyebrow="Buyer journey" title="From Inquiry to Dispatch" align="center" />
           <ol className="relative mx-auto mt-14 grid max-w-5xl gap-6 sm:grid-cols-3 lg:grid-cols-6">
@@ -87,7 +88,7 @@ export default function ExportServicesPage() {
                   <span className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-navy text-lg font-extrabold text-sun" style={{ fontFamily: "var(--font-poppins)" }}>
                     {i + 1}
                   </span>
-                  <p className="mt-3 font-semibold text-navy">{b}</p>
+                  <p className="mt-3 font-semibold text-ink">{b}</p>
                 </Reveal>
               </li>
             ))}

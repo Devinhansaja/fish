@@ -3,6 +3,7 @@ import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
 import { SITE_URL, site } from "@/lib/site";
 import { MotionProvider } from "@/components/MotionProvider";
+import { ThemeSync } from "@/components/ThemeToggle";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -51,9 +52,21 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${poppins.variable} ${inter.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${poppins.variable} ${inter.variable}`} data-theme="light" suppressHydrationWarning>
+      <head>
+        {/* Sets light/dark before first paint so there is no flash (saved choice, else the device setting). */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{var t=localStorage.getItem('aqz-theme');if(t!=='light'&&t!=='dark'){t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}document.documentElement.dataset.theme=t}catch(e){}",
+          }}
+        />
+      </head>
       <body>
-        <MotionProvider>{children}</MotionProvider>
+        <MotionProvider>
+          <ThemeSync />
+          {children}
+        </MotionProvider>
       </body>
     </html>
   );

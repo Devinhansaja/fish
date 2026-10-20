@@ -49,7 +49,7 @@ export function GalleryGrid() {
               type="button"
               aria-pressed={cat === c}
               onClick={() => setCat(c)}
-              className={`relative rounded-full border-2 px-4 py-2 text-sm font-semibold transition-colors ${cat === c ? "border-navy text-white" : "border-navy/15 text-navy hover:border-aqua"}`}
+              className={`relative rounded-full border-2 px-4 py-2 text-sm font-semibold transition-colors ${cat === c ? "border-navy text-white" : "border-ink/15 text-ink hover:border-aqua"}`}
             >
               {cat === c && <motion.span layoutId="gal-pill" className="absolute inset-0 rounded-full bg-navy" transition={{ type: "spring", stiffness: 380, damping: 32 }} />}
               <span className="relative">{c}</span>

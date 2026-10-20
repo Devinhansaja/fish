@@ -3,7 +3,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import Script from "next/script";
 import { useEffect, useRef, useState, type FormEvent } from "react";
-import { buyerTypes } from "@/lib/site";
+import { buyerTypes, site } from "@/lib/site";
 import { useSpecies } from "../SpeciesProvider";
 import { DEFAULT_QTY, useQuoteList } from "../InquiryList";
 import { QtyStepper } from "../QtyStepper";
@@ -14,6 +14,25 @@ import { ease } from "@/lib/motion";
 type Errors = Partial<Record<string, string>>;
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const TURNSTILE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+
+/** Builds a wa.me link with the inquiry pre-written, or null when no WhatsApp number is configured. */
+function whatsappUrl(v: (k: string) => string, picks: { name: string; qty: number }[]) {
+  if (!site.whatsapp) return null;
+  const lines = [
+    "*New inquiry from the Aquazone website*",
+    `Name: ${v("fullName")}`,
+    `Company: ${v("company")}`,
+    `Country: ${v("country")}`,
+    `Email: ${v("email")}`,
+    v("phone") && `Phone: ${v("phone")}`,
+    `Buyer type: ${v("buyerType")}`,
+    picks.length && `Species:\n${picks.map((p) => `- ${p.name}${p.qty ? ` x ${p.qty.toLocaleString("en-US")} pcs` : ""}`).join("\n")}`,
+    v("quantity") && `Quantity notes: ${v("quantity")}`,
+    v("destination") && `Destination: ${v("destination")}`,
+    v("message") && `Message: ${v("message")}`,
+  ].filter(Boolean);
+  return `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(lines.join("\n"))}`;
+}
 
 function Field({
   id,
@@ -45,6 +64,7 @@ export function InquiryForm() {
   const [errors, setErrors] = useState<Errors>({});
   const [state, setState] = useState<"idle" | "loading" | "ok" | "error">("idle");
   const [message, setMessage] = useState("");
+  const [waLink, setWaLink] = useState<string | null>(null);
   const startedAt = useRef(0);
   useEffect(() => {
     startedAt.current = Date.now();
@@ -68,6 +88,11 @@ export function InquiryForm() {
       formRef.current?.querySelector<HTMLElement>(`[name="${first}"]`)?.focus();
       return;
     }
+
+    // Open WhatsApp straight from the click so browsers don't treat it as a blocked popup.
+    const waUrl = whatsappUrl(v, items.flatMap((q) => { const s = bySlug(q.slug); return s ? [{ name: s.commonName, qty: q.qty }] : []; }));
+    if (waUrl) window.open(waUrl, "_blank", "noopener,noreferrer");
+    setWaLink(waUrl);
 
     setState("loading");
     try {
@@ -95,12 +120,19 @@ export function InquiryForm() {
         if (json.errors) setErrors(json.errors);
         throw new Error(json.message ?? "Submission failed");
       }
-      setMessage(json.message ?? "Thank you. We have received your inquiry.");
+      setMessage(waUrl ? "Your inquiry is ready in WhatsApp. Press Send there to deliver it to our team." : (json.message ?? "Thank you. We have received your inquiry."));
       setState("ok");
       clear();
       // Analytics hook - connect to GA4 / your tag manager
       (window as unknown as { dataLayer?: unknown[] }).dataLayer?.push({ event: "inquiry_submitted" });
     } catch (err) {
+      // WhatsApp is the delivery channel when configured, so a failed email/webhook is not fatal.
+      if (waUrl) {
+        setMessage("Your inquiry is ready in WhatsApp. Press Send there to deliver it to our team.");
+        setState("ok");
+        clear();
+        return;
+      }
       setMessage(err instanceof Error ? err.message : "Something went wrong.");
       setState("error");
     }
@@ -134,8 +166,13 @@ export function InquiryForm() {
                 <motion.circle cx="40" cy="40" r="34" fill="none" stroke="#00b4c6" strokeWidth="5" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 0.7, ease: ease.out }} />
                 <motion.path d="m24 41 11 11 22-24" fill="none" stroke="#ffd166" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 0.5, delay: 0.6, ease: ease.out }} />
               </svg>
-              <h3 className="mt-6 text-3xl">Inquiry received</h3>
+              <h3 className="mt-6 text-3xl">{waLink ? "One last step" : "Inquiry received"}</h3>
               <p className="mx-auto mt-3 max-w-md text-lg text-muted">{message}</p>
+              {waLink && (
+                <a href={waLink} target="_blank" rel="noopener noreferrer" className="btn-cta mt-6 inline-flex items-center gap-2" data-track="whatsapp-click">
+                  <Icon name="whatsapp" size={20} /> Open WhatsApp to send
+                </a>
+              )}
               <button type="button" className="btn-ghost mt-8" onClick={() => { setState("idle"); formRef.current?.reset(); }}>
                 Send another inquiry
               </button>
@@ -182,8 +219,8 @@ export function InquiryForm() {
 
             {/* species of interest (from quote list) */}
             <fieldset className="mt-6">
-              <legend className="mb-2 font-semibold text-navy">Species of interest</legend>
-              <div className="rounded-2xl bg-mint p-3">
+              <legend className="mb-2 font-semibold text-ink">Species of interest</legend>
+              <div className="rounded-2xl bg-alt p-3">
                 <ul className="space-y-2">
                   <AnimatePresence initial={false}>
                     {items.map((q) => {
@@ -196,7 +233,7 @@ export function InquiryForm() {
                           initial={{ opacity: 0, y: 8 }}
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, x: -20 }}
-                          className="flex flex-wrap items-center justify-between gap-3 rounded-xl bg-white px-4 py-2.5 shadow-sm"
+                          className="flex flex-wrap items-center justify-between gap-3 rounded-xl bg-surface px-4 py-2.5 shadow-sm"
                         >
                           <span className="min-w-0">
                             <span className="block truncate font-semibold">{s.commonName}</span>
@@ -205,7 +242,7 @@ export function InquiryForm() {
                           <span className="flex items-center gap-2">
                             <QtyStepper value={q.qty} label={s.commonName} onChange={(n) => setItem(q.slug, n)} />
                             <span className="text-xs font-semibold text-muted">pcs</span>
-                            <button type="button" onClick={() => remove(q.slug)} aria-label={`Remove ${s.commonName}`} className="grid h-8 w-8 place-items-center rounded-full text-navy/70 hover:bg-navy/10">
+                            <button type="button" onClick={() => remove(q.slug)} aria-label={`Remove ${s.commonName}`} className="grid h-8 w-8 place-items-center rounded-full text-ink/70 hover:bg-ink/10">
                               <Icon name="close" size={16} strokeWidth={2.4} />
                             </button>
                           </span>
@@ -225,7 +262,7 @@ export function InquiryForm() {
               <label className="mt-3 block">
                 <span className="sr-only">Add a species</span>
                 <select
-                  className="w-full rounded-full border-2 border-navy/15 bg-white px-4 py-2.5 text-navy focus:border-aqua focus:outline-none focus:ring-4 focus:ring-aqua/20 sm:w-auto"
+                  className="w-full rounded-full border-2 border-ink/15 bg-surface px-4 py-2.5 text-ink focus:border-aqua focus:outline-none focus:ring-4 focus:ring-aqua/20 sm:w-auto"
                   value=""
                   onChange={(e) => e.target.value && add(e.target.value, DEFAULT_QTY)}
                 >

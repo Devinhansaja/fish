@@ -7,5 +7,10 @@ export const metadata: Metadata = {
 
 /** The admin panel has no public header/footer/effects: it lives outside the (site) group. */
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
-  return <div className="min-h-screen bg-slate-100 text-navy">{children}</div>;
+  // The admin panel always stays in light mode, whatever the site theme is.
+  return (
+    <div data-theme="light" className="min-h-screen bg-slate-100 text-navy">
+      {children}
+    </div>
+  );
 }

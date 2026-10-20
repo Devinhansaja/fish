@@ -12,6 +12,7 @@ import { QualityChecklist } from "@/components/Quality";
 import { GhostButton, PrimaryCTA, SectionHeading, WaveDivider } from "@/components/ui";
 import { Reveal, WaterReveal } from "@/components/Reveal";
 import { BubbleField } from "@/components/Underwater";
+import { Hl } from "@/components/Hl";
 
 export const metadata: Metadata = {
   title: { absolute: "Aquazone | Sri Lankan Ornamental Fish Exporter - Premium Live Tropical Fish" },
@@ -27,7 +28,7 @@ export default function HomePage() {
       <TrustBar />
 
       {/* 03 - Welcome */}
-      <section className="section overflow-hidden bg-mint" aria-labelledby="welcome-title">
+      <section className="section overflow-hidden bg-alt" aria-labelledby="welcome-title">
         <div className="container-x grid items-center gap-14 lg:grid-cols-2">
           <WaterReveal className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-2xl">
             <Image
@@ -41,7 +42,7 @@ export default function HomePage() {
           <Reveal dir="right">
             <p className="eyebrow mb-4">Welcome to Aquazone</p>
             <h2 id="welcome-title" className="h2">
-              Bringing Sri Lanka&apos;s Finest Ornamental Fish to the World
+              <Hl>Bringing Sri Lanka&apos;s Finest Ornamental Fish to the World</Hl>
             </h2>
             <p className="mt-6 text-lg text-muted">
               Aquazone Ornamental Fish Farm (Pvt) Ltd is a government-registered exporter of high-quality live
@@ -60,7 +61,7 @@ export default function HomePage() {
       </section>
 
       {/* 04 - Why choose */}
-      <section className="section bg-white" aria-labelledby="why-title">
+      <section className="section bg-surface" aria-labelledby="why-title">
         <div className="container-x">
           <SectionHeading eyebrow="Why choose Aquazone?" title="Quality You Can Trust. Values You Can Share." align="center" />
           <FeatureCards />
@@ -68,7 +69,7 @@ export default function HomePage() {
       </section>
 
       {/* 05 - Featured fish */}
-      <section className="section overflow-hidden bg-mint !pb-10" aria-labelledby="featured-title">
+      <section className="section overflow-hidden bg-alt !pb-10" aria-labelledby="featured-title">
         <div className="container-x">
           <SectionHeading
             eyebrow="Fish collection"
@@ -87,7 +88,7 @@ export default function HomePage() {
       {/* 06 - Global export network */}
       <section className="on-dark relative overflow-hidden bg-deep" aria-labelledby="map-title">
         <div className="absolute inset-x-0 top-0 rotate-180">
-          <WaveDivider fill="#eefffc" />
+          <WaveDivider fill="var(--alt)" />
         </div>
         <BubbleField count={14} seed={11} />
         <div className="container-x relative py-28 sm:py-36">
@@ -110,18 +111,18 @@ export default function HomePage() {
           </div>
         </div>
         <div className="absolute inset-x-0 bottom-[-1px]">
-          <WaveDivider fill="#ffffff" />
+          <WaveDivider fill="var(--surface)" />
         </div>
       </section>
 
       {/* 07 - Quality preview */}
-      <section className="section overflow-hidden bg-white" aria-labelledby="quality-title">
+      <section className="section overflow-hidden bg-surface" aria-labelledby="quality-title">
         <div className="container-x grid items-center gap-14 lg:grid-cols-2">
           <div>
             <Reveal>
               <p className="eyebrow mb-4">Quality assurance</p>
               <h2 id="quality-title" className="h2">
-                Every Fish Matters. Every Shipment Counts.
+                <Hl>Every Fish Matters. Every Shipment Counts.</Hl>
               </h2>
               <p className="mt-6 text-lg text-muted">
                 From the tank to the box, each stage is handled with care, so that healthy, well-conditioned fish reach
@@ -174,7 +175,7 @@ export default function HomePage() {
       <SustainabilityPreview />
 
       {/* 10 - Testimonials */}
-      <section className="section bg-white" aria-labelledby="testimonials-title">
+      <section className="section bg-surface" aria-labelledby="testimonials-title">
         <div className="container-x">
           <SectionHeading eyebrow="What buyers say" title="Trusted by Aquarium Businesses" align="center" />
           <div className="mt-12">

@@ -219,7 +219,7 @@ export function FishCarousel() {
               aria-label={`Show ${s.commonName}`}
               aria-current={i === index}
               onClick={() => goToIndex(i)}
-              className="h-2.5 rounded-full bg-navy/25 transition-all duration-500 aria-[current=true]:w-8 aria-[current=true]:bg-aqua"
+              className="h-2.5 rounded-full bg-ink/25 transition-all duration-500 aria-[current=true]:w-8 aria-[current=true]:bg-aqua"
               style={{ width: i === index ? 32 : 10 }}
             />
           ))}
@@ -232,7 +232,7 @@ export function FishCarousel() {
               goAbs(nearestAbs() - 1);
               pauseUntil.current = performance.now() + 3500;
             }}
-            className="grid h-11 w-11 place-items-center rounded-full border-2 border-navy/20 text-navy transition hover:border-aqua hover:bg-aqua/10"
+            className="grid h-11 w-11 place-items-center rounded-full border-2 border-ink/20 text-ink transition hover:border-aqua hover:bg-aqua/10"
           >
             <Icon name="arrow" size={18} style={{ transform: "scaleX(-1)" }} />
           </button>
@@ -243,7 +243,7 @@ export function FishCarousel() {
               goAbs(nearestAbs() + 1);
               pauseUntil.current = performance.now() + 3500;
             }}
-            className="grid h-11 w-11 place-items-center rounded-full border-2 border-navy/20 text-navy transition hover:border-aqua hover:bg-aqua/10"
+            className="grid h-11 w-11 place-items-center rounded-full border-2 border-ink/20 text-ink transition hover:border-aqua hover:bg-aqua/10"
           >
             <Icon name="arrow" size={18} />
           </button>

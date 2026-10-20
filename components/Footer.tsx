@@ -9,6 +9,7 @@ import { NewsletterForm } from "./NewsletterForm";
 import { BubbleField, FishIllustration, useActive } from "./Underwater";
 import { WaveDivider } from "./ui";
 import { useMotionPrefs } from "./MotionProvider";
+import { useTheme } from "./ThemeToggle";
 import { useRef } from "react";
 import { Stagger, StaggerItem } from "./Reveal";
 
@@ -23,6 +24,7 @@ export function Footer() {
   const ref = useRef<HTMLElement>(null);
   const active = useActive(ref);
   const { manual, setManual } = useMotionPrefs();
+  const { theme, toggle: toggleTheme } = useTheme();
   const configured = socials.filter((s) => site.social[s.key]);
 
   return (
@@ -135,6 +137,22 @@ export function Footer() {
                 <span className="sr-only">Reduce motion</span>
               </button>
               <span>Reduce motion</span>
+            </div>
+            <div className="mt-4 flex items-center gap-3 text-sm">
+              <button
+                type="button"
+                role="switch"
+                aria-checked={theme === "dark"}
+                onClick={toggleTheme}
+                className="relative h-6 w-11 rounded-full bg-white/20 transition-colors aria-checked:bg-aqua"
+              >
+                <span
+                  className="absolute left-0.5 top-0.5 h-5 w-5 rounded-full bg-white transition-transform"
+                  style={{ transform: theme === "dark" ? "translateX(20px)" : "none" }}
+                />
+                <span className="sr-only">Dark mode</span>
+              </button>
+              <span>Dark mode</span>
             </div>
           </StaggerItem>
         </Stagger>

@@ -1,4 +1,4 @@
-﻿import type { SVGProps } from "react";
+import type { SVGProps } from "react";
 
 export type IconName =
   | "fish" | "grade" | "shield" | "bag" | "plane" | "doc" | "box" | "chat"
@@ -6,7 +6,7 @@ export type IconName =
   | "mail" | "pin" | "whatsapp" | "facebook" | "instagram" | "linkedin"
   | "youtube" | "globe" | "drop" | "thermo" | "ph" | "oxygen" | "search"
   | "plus" | "minus" | "star" | "download" | "close" | "menu" | "list"
-  | "microscope" | "water" | "trace" | "paw" | "cart";
+  | "microscope" | "water" | "trace" | "paw" | "cart" | "sun" | "moon";
 
 const paths: Record<IconName, React.ReactNode> = {
   fish: (
@@ -171,6 +171,13 @@ const paths: Record<IconName, React.ReactNode> = {
       <path d="m8.200 7.200 7.600 3.600M8.800 17.800l7-4" />
     </>
   ),
+  sun: (
+    <>
+      <circle cx="12" cy="12" r="4" />
+      <path d="M12 2.500v2.500M12 19v2.500M2.500 12H5M19 12h2.500M5.300 5.300l1.800 1.800M16.900 16.900l1.800 1.800M5.300 18.700l1.800-1.800M16.900 7.100l1.800-1.800" />
+    </>
+  ),
+  moon: <path d="M20 14.500A8.500 8.500 0 0 1 9.500 4 8.500 8.500 0 1 0 20 14.500Z" />,
   cart: (
     <>
       <path d="M3 4h2.2l2.300 11h10.300l2.200-8H6.200" />

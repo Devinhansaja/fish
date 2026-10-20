@@ -42,7 +42,7 @@ export default async function FishCollectionPage() {
         text="Koi, goldfish, tropical freshwater fish and selected Sri Lankan native species. Add the species you need to your quote list and request one consolidated quotation."
         image="/images/bg/fish-collection.jpg"
       />
-      <section className="section bg-white !pt-10" aria-label="Fish catalog">
+      <section className="section bg-surface !pt-10" aria-label="Fish catalog">
         <div className="container-x">
           <Reveal>
             <p className="mb-8 max-w-3xl text-muted">
